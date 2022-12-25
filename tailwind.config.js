@@ -25,10 +25,11 @@ const ColorSet = {
 const fontSizeSet = {
   css: {
     font: 'fontSize',
+    width: 'width',
+    height: 'height',
   },
   target: fontSize,
 };
-console.log(makeUtility(ColorSet));
 
 module.exports = {
   plugins: [
@@ -37,6 +38,21 @@ module.exports = {
     }),
     plugin(({addUtilities}) => {
       addUtilities(makeUtility(fontSizeSet));
+    }),
+
+    plugin(({addUtilities}) => {
+      addUtilities({
+        // inline-block
+        'aline-center': {
+          alignSelf: 'center',
+        },
+        'flex-row-center': 'flex-row justify-center items-center ',
+        'flex-row-start': 'flex-row justify-start items-center ',
+        'flex-row-end': 'flex-row justify-end items-center ',
+        'flex-center': 'flex justify-center items-center ',
+        'flex-start': 'flex justify-start items-center ',
+        'flex-end': 'flex justify-end items-center ',
+      });
     }),
   ],
 };
