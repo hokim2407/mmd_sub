@@ -6,6 +6,7 @@ import CompStarRate from '../components/common/Comp_StarRate';
 import CompTreatment from '../components/reviewList/Comp_Treatment';
 import tw from '../libs/Lib_Tw';
 import CompCustomer from '../components/reviewList/Comp_Customer';
+import CompLikeButton from '../components/reviewList/Comp_LikeButton';
 const TestPage = () => {
   return (
     <View>
@@ -23,7 +24,7 @@ const TestPage = () => {
       </View>
       <View style={tw`p-2`}>
         <CompCustomer
-        nameStyle={tw`text-black`}
+          nameStyle={tw`text-black`}
           customer={{
             id: 1,
             // 유저의 프로필 사진
@@ -38,6 +39,8 @@ const TestPage = () => {
           registered_at={'2022-01-02'}
         />
       </View>
+      <CompLikeButton />
+      <CompLikeButton mode="dark" />
     </View>
   );
 };
