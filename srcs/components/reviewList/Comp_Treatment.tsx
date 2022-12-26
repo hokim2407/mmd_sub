@@ -10,7 +10,7 @@ const CompTreatment = ({treatments}: {treatments: TreatmentType[]}) => {
   return (
     <View style={tw`p-2 py-2 bg-g1`}>
       {treatments.map((treatment, idx) => (
-        <>
+        <React.Fragment key={idx}>
           <View style={tw`p-1 flex-row-between`}>
             <CompNotoText style={tw`font-13 font-bold text-g7`}>
               {treatment.name}
@@ -22,7 +22,7 @@ const CompTreatment = ({treatments}: {treatments: TreatmentType[]}) => {
           {idx !== treatments.length - 1 && (
             <View style={tw`m-1 h-0 border-b border-g3`} />
           )}
-        </>
+        </React.Fragment>
       ))}
     </View>
   );
