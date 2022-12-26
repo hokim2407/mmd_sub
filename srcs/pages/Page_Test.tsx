@@ -8,6 +8,8 @@ import tw from '../libs/Lib_Tw';
 import CompCustomer from '../components/reviewList/Comp_Customer';
 import CompLikeButton from '../components/reviewList/Comp_LikeButton';
 import CompSimpleButton from '../components/reviewList/Comp_SimpleButton';
+import CompIconText from '../components/common/Comp_IconText';
+import CompRecomand from '../components/reviewList/Comp_Recomand';
 const TestPage = () => {
   return (
     <View>
@@ -44,6 +46,8 @@ const TestPage = () => {
       <CompLikeButton mode="dark" />
       <CompSimpleButton mode="big">이전 리뷰 보기</CompSimpleButton>
       <CompSimpleButton mode="small">클린 시스템 보기</CompSimpleButton>
+      <CompRecomand>12</CompRecomand>
+      <CompRecomand recommand>14</CompRecomand>
     </View>
   );
 };
