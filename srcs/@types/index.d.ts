@@ -51,6 +51,16 @@ interface ReviewType {
   already_liked: boolean;
 }
 
+interface treatmentPerNameType {
+  name: string;
+  count?: number;
+}
+
+interface hashType extends treatmentPerNameType {
+  id: string | number;
+  icon?: ImageSourcePropType;
+}
+
 interface hospitalType {
   id: number;
   name: string;
@@ -64,4 +74,5 @@ interface hospitalType {
   score_treatment_explain: number;
   // 병원 진료의 효과에 대한 점수
   score_treatment_outcome: number;
+  treatment_prices_count_per_name: treatmentPerNameType;
 }

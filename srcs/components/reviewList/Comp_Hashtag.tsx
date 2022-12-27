@@ -27,11 +27,12 @@ const CompHashtag = ({
   return (
     <TouchableHighlight
       onPress={onPress}
-      underlayColor={choiced ? color.p2 : color.p2}
+      underlayColor={choiced ? color.p2 : color.g2}
       style={tw`px-3 py-2 flex-row-center rounded-full border aline-center ${containerStyle}`}>
       <>
         {iconSrc && (
           <CompIconImage
+            onPress={onPress}
             src={iconSrc}
             style={tw`width-14 height-14`}
             color={textColor}
