@@ -9,16 +9,21 @@ const CompHashtag = ({
   children,
   iconSrc,
   choiced = false,
+  mode = 'hash',
   onPress,
 }: {
   children?: React.ReactNode;
   iconSrc?: ImageSourcePropType;
   choiced?: Boolean;
+  mode?: 'hash' | 'auth';
   onPress?: () => void;
 }) => {
-  const containerStyle = choiced ? 'border-p5 bg-p2' : 'border-g4 bg-white';
-  const textColor = choiced ? color.p5 : color.g6;
-
+  let containerStyle = choiced ? 'border-p5 bg-p2' : 'border-g4 bg-white';
+  let textColor = choiced ? color.p5 : color.g6;
+  if (mode === 'auth') {
+    containerStyle = 'px-[5] py-[2] border-p5 bg-p5';
+    textColor = '#ffffff';
+  }
   return (
     <TouchableHighlight
       onPress={onPress}
@@ -28,7 +33,7 @@ const CompHashtag = ({
         {iconSrc && (
           <CompIconImage
             src={iconSrc}
-            style={tw`width-12 height-12`}
+            style={tw`width-14 height-14`}
             color={textColor}
           />
         )}

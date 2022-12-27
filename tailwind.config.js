@@ -49,9 +49,11 @@ module.exports = {
         'flex-row-center': 'flex-row justify-center items-center ',
         'flex-row-start': 'flex-row justify-start items-center ',
         'flex-row-end': 'flex-row justify-end items-center ',
+        'flex-row-between': 'flex-row justify-between items-center ',
         'flex-center': 'flex justify-center items-center ',
         'flex-start': 'flex justify-start items-center ',
         'flex-end': 'flex justify-end items-center ',
+        'flex-between': 'flex justify-between items-center ',
       });
     }),
   ],

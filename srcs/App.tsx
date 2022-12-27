@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StatusBar} from 'react-native';
+import {SafeAreaView, StatusBar, Platform, UIManager} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TestPage from './pages/Page_Test';
@@ -8,6 +8,12 @@ import {color} from './configs/Conf_Style';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
+  if (
+    Platform.OS === 'android' &&
+    UIManager.setLayoutAnimationEnabledExperimental
+  ) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
   return (
     <SafeAreaView style={tw`flex-1`}>
       <StatusBar backgroundColor={color.p5} />
