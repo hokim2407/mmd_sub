@@ -13,6 +13,7 @@ import CompRecomand from '../components/reviewList/Comp_Recomand';
 import CompReviewCard from '../components/reviewList/Comp_ReviewCard';
 import CompHashList from '../components/reviewList/Comp_HashList';
 import {GetHospitalList} from '../apis/API_Hospitals';
+import CompStatCard from '../components/reviewList/Comp_StatCard';
 
 const TestPage = () => {
   const review = {
@@ -73,8 +74,25 @@ const TestPage = () => {
   useEffect(() => {
     // getInfo();
   });
+
+  const hospital = {
+    id: 4170,
+    name: '동원 치과 의원',
+    score_service_clarity: 8.69,
+    score_service_kindness: 8.8,
+    score_treatment_explain: 8.76,
+    score_treatment_outcome: 8.34,
+    total_score: 8.65,
+    treatment_prices_count_per_name: [
+      {
+        name: '치료',
+        count: 13,
+      },
+    ],
+  };
   return (
     <View>
+      <CompStatCard hospital={hospital} />
       <CompHashList hashList={hashs} />
       <CompReviewCard review={review} />
       <CompHashtag choiced iconSrc={SearchIcon}>

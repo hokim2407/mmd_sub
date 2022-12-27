@@ -60,12 +60,7 @@ interface hashType extends treatmentPerNameType {
   id: string | number;
   icon?: ImageSourcePropType;
 }
-
-interface hospitalType {
-  id: number;
-  name: string;
-  // 병원의 총점 평균. 10점 만점
-  total_score: number;
+interface scoreType {
   // 병원의 청결함에 대한 점수
   score_service_clarity: number;
   // 병원 직원의 친절에 대한 점수
@@ -74,5 +69,13 @@ interface hospitalType {
   score_treatment_explain: number;
   // 병원 진료의 효과에 대한 점수
   score_treatment_outcome: number;
-  treatment_prices_count_per_name: treatmentPerNameType;
+}
+
+interface hospitalType extends scoreType {
+  id: number;
+  name: string;
+  // 병원의 총점 평균. 10점 만점
+  total_score: number;
+  // 병원의 청결함에 대한 점수
+  treatment_prices_count_per_name: treatmentPerNameType[];
 }
