@@ -1,12 +1,6 @@
 import React from 'react';
-import {Text, StyleProp, ViewStyle, StyleSheet} from 'react-native';
-
-const styles = StyleSheet.create({
-  notoFont: {
-    fontFamily: 'NotoSansKR-Regular',
-    includeFontPadding: false,
-  },
-});
+import {Text, StyleProp, ViewStyle} from 'react-native';
+import tw from '../../libs/Lib_Tw';
 
 const CompNotoText = ({
   children,
@@ -18,7 +12,7 @@ const CompNotoText = ({
   onPress?: () => void;
 }) => {
   return (
-    <Text onPress={onPress} style={[styles.notoFont, style]}>
+    <Text onPress={onPress} style={[tw`noto-300`, style]}>
       {children}
     </Text>
   );

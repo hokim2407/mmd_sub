@@ -13,6 +13,7 @@ const makeUtility = cssSet => {
   return resultUtil;
 };
 
+// 컬러
 const ColorSet = {
   css: {
     text: 'color',
@@ -22,6 +23,7 @@ const ColorSet = {
   target: color,
 };
 
+// 폰트 크기
 const fontSizeSet = {
   css: {
     font: 'fontSize',
@@ -30,6 +32,30 @@ const fontSizeSet = {
   },
   target: fontSize,
 };
+
+// 폰트 weight
+const fontWeightSet = {
+  100: 'NotoSansKR-Thin',
+  200: 'NotoSansKR-Light',
+  300: 'NotoSansKR-Regular',
+  400: 'NotoSansKR-Medium',
+  500: 'NotoSansKR-Bold',
+};
+const fontWeightStyle = {};
+Object.keys(fontWeightSet).map(key => {
+  fontWeightStyle[`noto-${key}`] = {
+    fontFamily: fontWeightSet[key],
+    includeFontPadding: false,
+  };
+});
+
+// 레이아웃
+const layoutSet = ['center', 'start', 'end', 'between'];
+const layoutStyle = {};
+layoutSet.map(layout => {
+  layoutStyle[`flex-row-${layout}`] = `flex-row justify-${layout} items-center`;
+  layoutStyle[`flex-${layout}`] = `flex justify-${layout} items-center`;
+});
 
 module.exports = {
   plugins: [
@@ -46,14 +72,19 @@ module.exports = {
         'aline-center': {
           alignSelf: 'center',
         },
-        'flex-row-center': 'flex-row justify-center items-center ',
-        'flex-row-start': 'flex-row justify-start items-center ',
-        'flex-row-end': 'flex-row justify-end items-center ',
-        'flex-row-between': 'flex-row justify-between items-center ',
-        'flex-center': 'flex justify-center items-center ',
-        'flex-start': 'flex justify-start items-center ',
-        'flex-end': 'flex justify-end items-center ',
-        'flex-between': 'flex justify-between items-center ',
+        ...layoutStyle,
+        ...fontWeightStyle,
+        shadow: {
+          backgroundColor: 'white',
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 4,
+          },
+          shadowOpacity: 0.5,
+          elevation: 3,
+          zIndex: 3,
+        },
       });
     }),
   ],
