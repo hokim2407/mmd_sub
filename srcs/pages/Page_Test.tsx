@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import CompHashtag from '../components/review_comp/Comp_Hashtag';
 import SearchIcon from '../assets/images/Search.png';
@@ -12,104 +12,60 @@ import CompRecomandIcon from '../components/review_comp/Comp_RecomandIcon';
 import CompReviewCard from '../components/review/Comp_ReviewCard';
 import CompHashList from '../components/review/Comp_HashList';
 import CompStatCard from '../components/review/Comp_StatCard';
+import {GetHospitalList} from '../apis/API_Hospitals';
+import {GetReviewDetail, GetReviewList} from '../apis/API_Reviews';
 
 const TestPage = () => {
-  const review = {
-    id: 3,
-    customer: {
-      id: 7,
-      // 유저의 프로필 사진
-      profile_image: 'A',
-      // 유저의 닉네임
-      nickname: '감비아구렁이',
-      // 유저가 작성한 리뷰의 갯수
-      review_cnt: 7,
-      // 유저가 작성한 리뷰의 liked_cnt 값의 총합
-      liked_cnt: 7,
-    },
-    hospital_id: 3,
-    hospital_name: 'A',
-    doctor_id: 3,
-    doctor_name: '권효연',
-    total_score: 3,
-    // 청결함에 대한 점수
-    score_service_clarity: 3,
-    // 직원의 친절함에 대한 점수
-    score_service_kindness: 3,
-    // 의사의 친절함에 대한 점수
-    score_treatment_explain: 3,
-    // 진료의 효과에 대한 점수
-    score_treatment_outcome: 3,
-    // 리뷰 등록 시점
-    registered_at: '2019.08.29',
-    // 리뷰를 작성한 병원 방문 시점
-    visited_at: '2년전 방문',
-    treatment_prices: [
-      {
-        // 리뷰에 기재된 진료 항목
-        name: '사랑니 발치',
-        price: '20000',
-      },
-    ],
-    // 리뷰 내용, 콘텐츠
-    contents: `정말 가히 사랑니발치의 신이라고 칭하고 싶습니다.. 사실 거리가 좀 있었는데도 내원한 이유는 사랑니 발치가격을 100% 오픈해주셔서 믿음이 갔어요
-과잉진료에 대한 부분이 일단 마음이 놓였고, 남아있는 사랑니가 2개 되는데 상태를 봐주시더니 굳이 뽑지 않고 나중에 문제가 되면 뽑아도 된다고 말해주셔서 더 믿음이 갔습니다! 어휴 마취가 제일 아프지 뽑히고 나서는 뽑힌줄도 몰랐어요ㅋㅋ`,
-    // 해당 병원을 추천는지 여부. True면 재방문 의사가 있다고 간주합니다.
-    suggest: true,
-    // 리뷰에 '도움됐어요' 버튼을 누른 유저의 수
-    liked_cnt: 3,
-    // 해당 리뷰에 '도움됐어요' 버튼을 눌렀는지 여부
-    already_liked: false,
+  const [hospital, setHospital] = useState<HospitalType>();
+  const [review, setReview] = useState<ReviewType>();
+
+  const getInfo = async () => {
+    console.log(1);
+    try {
+      const hospitalList = await GetHospitalList();
+      console.log(hospitalList.result.hospitals[0]);
+
+      if (!hospitalList.success) return;
+
+      setHospital(hospitalList.result.hospitals[0]);
+
+      const reviewList = await GetReviewList(
+        hospitalList.result.hospitals[0].id,
+        0,
+        20,
+      );
+      if (!reviewList.success) return;
+      setReview(reviewList.result.reviews[0]);
+      console.log(reviewList.result.reviews[0]);
+      const reviewDetail = await GetReviewDetail(
+        hospitalList.result.hospitals[0].id,
+        reviewList.result.reviews[0].id,
+      );
+      console.log(reviewDetail.result.review);
+    } catch (e) {
+      console.log(e);
+    }
   };
-
-  const hashs = [
-    {name: '사랑니 발치', count: 17},
-    {name: '사랑니 발치', count: 17},
-    {name: '사랑니 발치', count: 17},
-    {name: '사랑니 발치', count: 17},
-  ];
-
   useEffect(() => {
-    // getInfo();
-  });
+    getInfo();
+  }, []);
 
-  const hospital = {
-    id: 4170,
-    name: '동원 치과 의원',
-    score_service_clarity: 8.69,
-    score_service_kindness: 8.8,
-    score_treatment_explain: 8.76,
-    score_treatment_outcome: 8.34,
-    total_score: 8.65,
-    treatment_prices_count_per_name: [
-      {
-        name: '치료',
-        count: 13,
-      },
-    ],
-  };
   return (
     <View>
-      <CompStatCard hospital={hospital} />
-      <CompHashList hashList={hashs} />
-      <CompReviewCard review={review} />
-      <View style={tw`p-2 bg-white`}>
-        <CompCustomer
-          nameStyle={tw`text-black`}
-          customer={{
-            id: 1,
-            // 유저의 프로필 사진
-            profile_image: '1',
-            // 유저의 닉네임
-            nickname: '감비아구렁이',
-            // 유저가 작성한 리뷰의 갯수
-            review_cnt: 2,
-            // 유저가 작성한 리뷰의 liked_cnt 값의 총합
-            liked_cnt: 1,
-          }}
-          registered_at={'2022-01-02'}
-        />
-      </View>
+      {hospital && <CompStatCard hospital={hospital} />}
+      {hospital && (
+        <CompHashList hashList={hospital.treatment_prices_count_per_name} />
+      )}
+      {review && <CompReviewCard review={review} />}
+      {review && (
+        <View style={tw`p-2 bg-white`}>
+          <CompCustomer
+            nameStyle={tw`text-black`}
+            customer={review.customer}
+            registered_at={'2022-01-02'}
+          />
+        </View>
+      )}
       <CompHashtag choiced iconSrc={SearchIcon}>
         검색
       </CompHashtag>

@@ -2,6 +2,10 @@ type NavProps = NativeStackScreenProps<NavParamList, string>;
 declare module '*.png';
 declare module '*.jpg';
 
+declare module '@env' {
+  export const API_KEY: string;
+}
+
 interface CustomerType {
   id: number;
   // 유저의 프로필 사진
@@ -51,16 +55,16 @@ interface ReviewType {
   already_liked: boolean;
 }
 
-interface treatmentPerNameType {
+interface TreatmentPerNameType {
   name: string;
   count?: number;
 }
 
-interface hashType extends treatmentPerNameType {
+interface HashType extends TreatmentPerNameType {
   id: string | number;
   icon?: ImageSourcePropType;
 }
-interface scoreType {
+interface ScoreType {
   // 병원의 청결함에 대한 점수
   score_service_clarity: number;
   // 병원 직원의 친절에 대한 점수
@@ -71,11 +75,11 @@ interface scoreType {
   score_treatment_outcome: number;
 }
 
-interface hospitalType extends scoreType {
+interface HospitalType extends ScoreType {
   id: number;
   name: string;
   // 병원의 총점 평균. 10점 만점
   total_score: number;
   // 병원의 청결함에 대한 점수
-  treatment_prices_count_per_name: treatmentPerNameType[];
+  treatment_prices_count_per_name: TreatmentPerNameType[];
 }
