@@ -5,8 +5,8 @@ import SearchIcon from '../../assets/images/Search.png';
 import CompHashtag from '../review_comp/Comp_Hashtag';
 import CompSearchBar from '../review_comp/Comp_SearchBar';
 
-const CompHashList = ({hashList}: {hashList: treatmentPerNameType[]}) => {
-  const hashs: hashType[] = [
+const CompHashList = ({hashList}: {hashList: TreatmentPerNameType[]}) => {
+  const hashs: HashType[] = [
     {id: 'all', name: '전체'},
     {id: 'search', name: '검색', icon: SearchIcon},
   ].concat();

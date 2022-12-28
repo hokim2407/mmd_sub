@@ -4,7 +4,7 @@ import tw from '../../libs/Lib_Tw';
 import CompStarRate from '../common/Comp_StarRate';
 import CompNotoText from '../common/Comp_NotoText';
 import CompRecomandIcon from '../review_comp/Comp_RecomandIcon';
-const CompStatCard = ({hospital}: {hospital: hospitalType}) => {
+const CompStatCard = ({hospital}: {hospital: HospitalType}) => {
   const scoreType = {
     score_service_clarity: '청결함',
     score_service_kindness: '직원의 친절',
@@ -21,11 +21,11 @@ const CompStatCard = ({hospital}: {hospital: hospitalType}) => {
             <React.Fragment key={idx}>
               <View style={tw`flex-1 p-1 flex-row-between`}>
                 <CompNotoText style={tw`flex-1 text-black font-12`}>
-                  {scoreType[key as keyof scoreType]}
+                  {scoreType[key as keyof ScoreType]}
                 </CompNotoText>
                 <View style={tw`w-0 h-5 px-1 border-l border-g3`} />
                 <View style={tw`flex-1`}>
-                  <CompStarRate rate={hospital[key as keyof scoreType]} />
+                  <CompStarRate rate={hospital[key as keyof ScoreType]} />
                 </View>
               </View>
 
