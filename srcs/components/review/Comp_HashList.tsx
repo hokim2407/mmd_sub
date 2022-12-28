@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {View, ScrollView, LayoutAnimation} from 'react-native';
 import tw from '../../libs/Lib_Tw';
 import SearchIcon from '../../assets/images/Search.png';
-import CompHashtag from './Comp_Hashtag';
-import CompSearchBar from './Comp_SearchBar';
+import CompHashtag from '../review_comp/Comp_Hashtag';
+import CompSearchBar from '../review_comp/Comp_SearchBar';
 
 const CompHashList = ({hashList}: {hashList: treatmentPerNameType[]}) => {
   const hashs: hashType[] = [

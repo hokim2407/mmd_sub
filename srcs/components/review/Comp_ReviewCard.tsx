@@ -6,8 +6,8 @@ import CompStarRate from '../common/Comp_StarRate';
 import Check from '../../assets/images/Check.png';
 import {color} from '../../configs/Conf_Style';
 import CompFoldableText from '../common/Comp_FoldableText';
-import CompTreatment from './Comp_Treatment';
-import CompHashtag from './Comp_Hashtag';
+import CompTreatment from '../review_comp/Comp_Treatment';
+import CompHashtag from '../review_comp/Comp_Hashtag';
 const CompReviewCard = ({
   review,
   onPress,

@@ -1,19 +1,17 @@
 import React, {useEffect} from 'react';
 import {View} from 'react-native';
-import CompHashtag from '../components/reviewList/Comp_Hashtag';
+import CompHashtag from '../components/review_comp/Comp_Hashtag';
 import SearchIcon from '../assets/images/Search.png';
 import CompStarRate from '../components/common/Comp_StarRate';
-import CompTreatment from '../components/reviewList/Comp_Treatment';
+import CompTreatment from '../components/review_comp/Comp_Treatment';
 import tw from '../libs/Lib_Tw';
-import CompCustomer from '../components/reviewList/Comp_Customer';
-import CompLikeButton from '../components/reviewList/Comp_LikeButton';
-import CompSimpleButton from '../components/reviewList/Comp_SimpleButton';
-import CompIconText from '../components/common/Comp_IconText';
-import CompRecomand from '../components/reviewList/Comp_Recomand';
-import CompReviewCard from '../components/reviewList/Comp_ReviewCard';
-import CompHashList from '../components/reviewList/Comp_HashList';
-import {GetHospitalList} from '../apis/API_Hospitals';
-import CompStatCard from '../components/reviewList/Comp_StatCard';
+import CompCustomer from '../components/review_comp/Comp_Customer';
+import CompLikeButton from '../components/review_comp/Comp_LikeButton';
+import CompSimpleButton from '../components/review_comp/Comp_SimpleButton';
+import CompRecomandIcon from '../components/review_comp/Comp_RecomandIcon';
+import CompReviewCard from '../components/review/Comp_ReviewCard';
+import CompHashList from '../components/review/Comp_HashList';
+import CompStatCard from '../components/review/Comp_StatCard';
 
 const TestPage = () => {
   const review = {
@@ -95,19 +93,7 @@ const TestPage = () => {
       <CompStatCard hospital={hospital} />
       <CompHashList hashList={hashs} />
       <CompReviewCard review={review} />
-      <CompHashtag choiced iconSrc={SearchIcon}>
-        검색
-      </CompHashtag>
-      <CompHashtag>전체</CompHashtag>
-      <CompStarRate rate={8.7} showRate />
-      <View style={tw`w-[80%]`}>
-        <CompTreatment
-          treatments={[
-            {name: '치료', price: '23000'},
-            {name: '치료', price: '23000'},
-          ]}></CompTreatment>
-      </View>
-      <View style={tw`p-2`}>
+      <View style={tw`p-2 bg-white`}>
         <CompCustomer
           nameStyle={tw`text-black`}
           customer={{
@@ -124,12 +110,24 @@ const TestPage = () => {
           registered_at={'2022-01-02'}
         />
       </View>
+      <CompHashtag choiced iconSrc={SearchIcon}>
+        검색
+      </CompHashtag>
+      <CompHashtag>전체</CompHashtag>
+      <CompStarRate rate={8.7} showRate />
+      <View style={tw`w-[80%]`}>
+        <CompTreatment
+          treatments={[
+            {name: '치료', price: '23000'},
+            {name: '치료', price: '23000'},
+          ]}></CompTreatment>
+      </View>
       <CompLikeButton />
       <CompLikeButton mode="dark" />
       <CompSimpleButton mode="big">이전 리뷰 보기</CompSimpleButton>
       <CompSimpleButton mode="small">클린 시스템 보기</CompSimpleButton>
-      <CompRecomand>12</CompRecomand>
-      <CompRecomand recommand>14</CompRecomand>
+      <CompRecomandIcon>12</CompRecomandIcon>
+      <CompRecomandIcon recommand>14</CompRecomandIcon>
     </View>
   );
 };

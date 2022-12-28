@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import tw from '../../libs/Lib_Tw';
 import CompStarRate from '../common/Comp_StarRate';
 import CompNotoText from '../common/Comp_NotoText';
-import CompRecomandIcon from './Comp_RecomandIcon';
+import CompRecomandIcon from '../review_comp/Comp_RecomandIcon';
 const CompStatCard = ({hospital}: {hospital: hospitalType}) => {
   const scoreType = {
     score_service_clarity: '청결함',
