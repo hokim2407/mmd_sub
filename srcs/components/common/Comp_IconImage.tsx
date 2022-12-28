@@ -6,6 +6,7 @@ import {
   ViewStyle,
   StyleProp,
   ImageStyle,
+  ColorValue,
 } from 'react-native';
 
 const CompIconImage = ({
@@ -16,7 +17,7 @@ const CompIconImage = ({
   onPress,
 }: {
   src: ImageSourcePropType;
-  color?: string;
+  color?: ColorValue;
   style?: StyleProp<ViewStyle>;
   imgStyle?: StyleProp<ImageStyle>;
   onPress?: () => void;

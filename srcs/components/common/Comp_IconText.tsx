@@ -1,22 +1,41 @@
 import React from 'react';
-import {View, ImageSourcePropType, StyleProp, ViewStyle} from 'react-native';
+import {
+  View,
+  ImageSourcePropType,
+  StyleProp,
+  ViewStyle,
+  ImageStyle,
+  ColorValue,
+} from 'react-native';
 import CompIconImage from './Comp_IconImage';
 import CompNotoText from './Comp_NotoText';
 import tw from '../../libs/Lib_Tw';
 
 const CompIconText = ({
   children,
-  src,
+  imageSrc,
+  imageColor,
   containerStyle,
+  textStyle,
+  imageStyle,
 }: {
   children: React.ReactNode;
-  src: ImageSourcePropType;
+  imageSrc: ImageSourcePropType;
   containerStyle?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<ViewStyle>;
+  imageStyle?: StyleProp<ImageStyle>;
+  imageColor?: ColorValue;
 }) => {
   return (
     <View style={[tw`flex-row-start`, containerStyle]}>
-      <CompIconImage src={src} style={tw`width-12 height-12`} />
-      <CompNotoText style={tw`font-12 text-g6 mr-1`}>{children}</CompNotoText>
+      <CompIconImage
+        color={imageColor}
+        src={imageSrc}
+        style={[tw`width-12 height-12`, imageStyle]}
+      />
+      <CompNotoText style={[tw`font-12 text-g6 mr-1`, textStyle]}>
+        {children}
+      </CompNotoText>
     </View>
   );
 };

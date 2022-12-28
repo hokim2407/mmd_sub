@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 import tw from '../../libs/Lib_Tw';
 import CompStarRate from '../common/Comp_StarRate';
 import CompNotoText from '../common/Comp_NotoText';
-import CompRecomand from './Comp_Recomand';
+import CompRecomandIcon from './Comp_RecomandIcon';
 const CompStatCard = ({hospital}: {hospital: hospitalType}) => {
   const scoreType = {
     score_service_clarity: '청결함',
@@ -38,7 +38,7 @@ const CompStatCard = ({hospital}: {hospital: hospitalType}) => {
       </View>
       {/* 세부 평가 끝*/}
       {/* 평균 */}
-      <View style={tw`flex-1 bg-g1 border-y border-r border-g3`}>
+      <View style={tw`flex-1 bg-g1  border border-l-0 border-g3`}>
         <View style={tw`flex-center`}>
           <CompNotoText style={tw`text-black font-12 pt-4 text-g3`}>
             별점 평균
@@ -53,10 +53,10 @@ const CompStatCard = ({hospital}: {hospital: hospitalType}) => {
           </View>
         </View>
         <View style={tw`flex-row border-t border-g3`}>
-          <CompRecomand recommand style={tw`border-r border-g3`}>
+          <CompRecomandIcon recommand style={tw`border-r border-g3`}>
             7
-          </CompRecomand>
-          <CompRecomand> 2</CompRecomand>
+          </CompRecomandIcon>
+          <CompRecomandIcon> 2</CompRecomandIcon>
         </View>
       </View>
 

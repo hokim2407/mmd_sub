@@ -21,10 +21,10 @@ const CompCustomer = ({
         {customer.nickname}
       </CompNotoText>
       <View style={tw`flex-row-start`}>
-        <CompIconText src={EditIcon} containerStyle={tw`mr-1`}>
+        <CompIconText imageSrc={EditIcon} containerStyle={tw`mr-1`}>
           {customer.review_cnt}
         </CompIconText>
-        <CompIconText src={LikeIcon}>{customer.liked_cnt}</CompIconText>
+        <CompIconText imageSrc={LikeIcon}>{customer.liked_cnt}</CompIconText>
         <View style={tw`bg-black w-0 height-12 border-l border-g3 m-1 mr-2`} />
         <CompNotoText style={tw`text-g6 font-12`}>
           {registered_at} 등록
