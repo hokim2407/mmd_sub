@@ -3,6 +3,7 @@ import {SafeAreaView, StatusBar, Platform, UIManager} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TestPage from './pages/Page_Test';
+import PageMain from './pages/Page_Main';
 import tw from './libs/Lib_Tw';
 import {color} from './configs/Conf_Style';
 
@@ -19,6 +20,11 @@ const App = () => {
       <StatusBar backgroundColor={color.p5} />
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen
+            name="Main"
+            options={{headerShown: false}}
+            component={PageMain}
+          />
           <Stack.Screen
             name="Test"
             options={{headerShown: false}}
