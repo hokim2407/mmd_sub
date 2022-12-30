@@ -13,7 +13,7 @@ const CompSimpleButton = ({
   onPress?: () => void;
 }) => {
   const containerStyle =
-    mode === 'big' ? 'border-g6 p-3' : 'aline-center border-g3 p-1';
+    mode === 'big' ? 'border-g6 p-3 w-[49%]' : 'aline-center border-g3 p-1';
   const textStyle = mode === 'big' ? ' font-14' : 'font-12';
 
   return (

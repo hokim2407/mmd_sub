@@ -9,6 +9,7 @@ import {color} from './configs/Conf_Style';
 import {store} from './context/store';
 import {Provider} from 'react-redux';
 import PageReviewList from './pages/Page_ReviewList';
+import PageReviewDetail from './pages/Page_ReviewDetail';
 const App = () => {
   const Stack = createNativeStackNavigator();
   if (
@@ -25,6 +26,7 @@ const App = () => {
           <Stack.Navigator>
             <Stack.Screen name="Main" component={PageMain} />
             <Stack.Screen name="ReviewList" component={PageReviewList} />
+            <Stack.Screen name="ReviewDetail" component={PageReviewDetail} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>

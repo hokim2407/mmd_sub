@@ -20,10 +20,8 @@ const TestPage = () => {
   const [review, setReview] = useState<ReviewType>();
 
   const getInfo = async () => {
-    console.log(1);
     try {
       const hospitalList = await GetHospitalList();
-      console.log(hospitalList.result.hospitals[0]);
 
       if (!hospitalList.success) return;
 
@@ -31,17 +29,15 @@ const TestPage = () => {
 
       const reviewList = await GetReviewList(
         hospitalList.result.hospitals[0].id,
-        0,
+        1,
         20,
       );
       if (!reviewList.success) return;
       setReview(reviewList.result.reviews[0]);
-      console.log(reviewList.result.reviews[0]);
       const reviewDetail = await GetReviewDetail(
         hospitalList.result.hospitals[0].id,
         reviewList.result.reviews[0].id,
       );
-      console.log(reviewDetail.result.review);
     } catch (e) {
       console.log(e);
     }
@@ -78,7 +74,6 @@ const TestPage = () => {
             {name: '치료', price: '23000'},
           ]}></CompTreatment>
       </View>
-      <CompLikeButton />
       <CompLikeButton mode="dark" />
       <CompSimpleButton mode="big">이전 리뷰 보기</CompSimpleButton>
       <CompSimpleButton mode="small">클린 시스템 보기</CompSimpleButton>

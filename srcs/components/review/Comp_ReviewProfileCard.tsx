@@ -8,13 +8,15 @@ import CompLikeButton from '../review_comp/Comp_LikeButton';
 const CompReviewProfileCard = ({
   review,
   hospital,
+  onPress,
 }: {
   review: ReviewType;
   hospital: HospitalType;
+  onPress: () => void;
 }) => {
   return (
     <View style={tw`bg-white p-6`}>
-      <CompReviewCard review={review} />
+      <CompReviewCard onPress={onPress} review={review} />
 
       <View style={tw`bg-white h-0 w-[100%] border-t border-g3 mt-3 mb-6`} />
 

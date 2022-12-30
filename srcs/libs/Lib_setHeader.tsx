@@ -3,10 +3,10 @@ import tw from './Lib_Tw';
 const setHeader = (navigation: NavProps, title: string) => {
   navigation.setOptions({
     title: title,
-    headerStyle: tw`bg-[#4c1192]`,
+    headerStyle: tw`bg-p5`,
     headerTintColor: '#fff',
     headerTitleAlign: 'center',
-    headerTitleStyle: tw`w-full text-white font-bold`,
+    headerTitleStyle: tw`w-full text-white font-bold font-14`,
   });
 };
 export default setHeader;

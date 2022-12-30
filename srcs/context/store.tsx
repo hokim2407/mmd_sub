@@ -1,8 +1,9 @@
 import {configureStore} from '@reduxjs/toolkit';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {hospitalsReducer} from './Slice_hospitals';
+import {currentReducer} from './Slice_current';
 const store = configureStore({
-  reducer: {hospitals: hospitalsReducer},
+  reducer: {hospitals: hospitalsReducer, current: currentReducer},
 });
 
 export type RootState = ReturnType<typeof store.getState>;

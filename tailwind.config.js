@@ -85,6 +85,9 @@ module.exports = {
           elevation: 3,
           zIndex: 3,
         },
+        underline: {
+          textDecorationLine: 'underline',
+        },
       });
     }),
   ],

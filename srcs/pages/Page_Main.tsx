@@ -8,6 +8,7 @@ import {GetHospitalList} from '../apis/API_Hospitals';
 import {useAppSelector, useAppDispatch} from '../context/store';
 import {setHospitals} from '../context/Slice_hospitals';
 import setHeader from '../libs/Lib_setHeader';
+import {setCurHospital} from '../context/Slice_current';
 
 const PageMain = ({navigation}: NavProps) => {
   const hospitals = useAppSelector(state => state.hospitals.hospitals);
@@ -34,7 +35,8 @@ const PageMain = ({navigation}: NavProps) => {
 
   const onCardPress = (hospital: HospitalType) => {
     return () => {
-      navigation?.push('ReviewList', {idx: hospital.idx});
+      dispatch(setCurHospital(hospital.idx));
+      navigation?.push('ReviewList');
     };
   };
 

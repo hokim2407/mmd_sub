@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import tw from '../../libs/Lib_Tw';
 import CompNotoText from '../common/Comp_NotoText';
@@ -10,10 +10,12 @@ import CompTreatment from '../review_comp/Comp_Treatment';
 import CompHashtag from '../review_comp/Comp_Hashtag';
 const CompReviewCard = ({
   review,
+  folable = true,
   onPress,
 }: {
   review: ReviewType;
-  onPress?: () => {};
+  folable?: boolean;
+  onPress?: () => void;
 }) => {
   const BorderText = ({
     children,
@@ -31,6 +33,20 @@ const CompReviewCard = ({
       </>
     );
   };
+  const revisit = useCallback(() => {
+    return (
+      review?.suggest === true && (
+        <BorderText textColor={color.p4}>재방문 의사 있음</BorderText>
+      )
+    );
+  }, [review?.suggest]);
+  const visited_at = useCallback(() => {
+    return (
+      review?.visited_at !== undefined && (
+        <BorderText textColor={color.g6}>{review.visited_at}</BorderText>
+      )
+    );
+  }, [review?.visited_at]);
 
   return (
     <View style={tw`flex  bg-white py-3`}>
@@ -46,12 +62,8 @@ const CompReviewCard = ({
         </CompNotoText>
         <View style={tw`flex-row items-center`}>
           <CompStarRate rate={review.total_score} showRate />
-          {review?.suggest === true && (
-            <BorderText textColor={color.p4}>재방문 의사 있음</BorderText>
-          )}
-          {review?.visited_at !== undefined && (
-            <BorderText textColor={color.g6}>{review.visited_at}</BorderText>
-          )}
+          {revisit()}
+          {visited_at()}
         </View>
         <CompNotoText style={tw`text-[${color.g6}] font-13`}>
           의사:{review.doctor_name}
@@ -60,7 +72,14 @@ const CompReviewCard = ({
       {/* 헤더 끝 */}
 
       {/* 리뷰내용 시작 */}
-      <CompFoldableText textStyle={tw`mb-4`} text={review.contents} />
+      {folable && (
+        <CompFoldableText textStyle={tw`mb-4`} text={review.contents} />
+      )}
+      {folable || (
+        <CompNotoText style={tw`items-center font-14 text-g7 pb-6`}>
+          {review.contents}
+        </CompNotoText>
+      )}
       {/* 리뷰내용 끝 */}
 
       {/* 치료내역 시작 */}

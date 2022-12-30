@@ -11,12 +11,14 @@ import CompReviewProfileCard from '../components/review/Comp_ReviewProfileCard';
 import {updateReviewPage} from '../context/Slice_hospitals';
 import CompReciptCard from '../components/review/Comp_ReciptCard';
 import setHeader from '../libs/Lib_setHeader';
+import {setCurReview} from '../context/Slice_current';
 
-const PageReviewList = ({route, navigation}: NavProps) => {
+const PageReviewList = ({navigation}: NavProps) => {
   const dispatch = useAppDispatch();
-
-  const hospitals = useAppSelector(state => state.hospitals.hospitals);
-  const hospital = hospitals[route.params.idx];
+  const hospitalIdx = useAppSelector(state => state.current.hospitalIdx);
+  const hospital = useAppSelector(
+    state => state.hospitals.hospitals[hospitalIdx],
+  );
   const reviews = hospital?.reviews;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -34,7 +36,7 @@ const PageReviewList = ({route, navigation}: NavProps) => {
       if (reviewList.success) {
         dispatch(
           updateReviewPage({
-            idx: route.params.idx,
+            idx: hospitalIdx,
             reviews: reviewList.result.reviews,
           }),
         );
@@ -46,7 +48,7 @@ const PageReviewList = ({route, navigation}: NavProps) => {
     setTimeout(() => {
       setIsLoading(false);
     }, 1500);
-  }, [route.params, hospital.id, hospital.review_page, dispatch, isLoading]);
+  }, [hospitalIdx, hospital.id, hospital.review_page, dispatch, isLoading]);
 
   useEffect(() => {
     getInfo();
@@ -101,7 +103,14 @@ const PageReviewList = ({route, navigation}: NavProps) => {
           onEndReachedThreshold={0}
           ListHeaderComponent={renderHeader()}
           renderItem={({item}) => (
-            <CompReviewProfileCard review={item} hospital={hospital} />
+            <CompReviewProfileCard
+              review={item}
+              hospital={hospital}
+              onPress={() => {
+                dispatch(setCurReview(item.idx));
+                navigation.push('ReviewDetail');
+              }}
+            />
           )}
           ItemSeparatorComponent={() => <View style={tw`h-3`} />}
           keyExtractor={item => item.id.toString()}
