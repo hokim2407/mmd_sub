@@ -24,7 +24,7 @@ const CompReviewCard = ({
   }) => {
     return (
       <>
-        <View style={tw`w-1 m-1 h-[60%] border-l border-[${color.g3}]`} />
+        <View style={tw`w-1 m-1 h-[60%] border-l border-g3`} />
         <CompNotoText style={tw`text-[${textColor}] font-13`}>
           {children}
         </CompNotoText>
@@ -33,7 +33,7 @@ const CompReviewCard = ({
   };
 
   return (
-    <View style={tw`flex  bg-white py-3 px-4`}>
+    <View style={tw`flex  bg-white py-3`}>
       <View style={tw`flex-row`}>
         <CompHashtag mode="auth" iconSrc={Check}>
           영수증 인증
@@ -46,10 +46,10 @@ const CompReviewCard = ({
         </CompNotoText>
         <View style={tw`flex-row items-center`}>
           <CompStarRate rate={review.total_score} showRate />
-          {review.suggest && (
+          {review?.suggest === true && (
             <BorderText textColor={color.p4}>재방문 의사 있음</BorderText>
           )}
-          {review.visited_at && (
+          {review?.visited_at !== undefined && (
             <BorderText textColor={color.g6}>{review.visited_at}</BorderText>
           )}
         </View>
@@ -70,4 +70,4 @@ const CompReviewCard = ({
   );
 };
 
-export default CompReviewCard;
+export default React.memo(CompReviewCard);

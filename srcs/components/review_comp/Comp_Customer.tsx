@@ -10,13 +10,15 @@ const CompCustomer = ({
   customer,
   registered_at,
   nameStyle,
+  style,
 }: {
   customer: CustomerType;
   registered_at: string;
   nameStyle?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
 }) => {
   return (
-    <>
+    <View style={[tw`flex-col`, style]}>
       <CompNotoText style={[tw`text-g7 font-12 font-bold`, nameStyle]}>
         {customer.nickname}
       </CompNotoText>
@@ -27,11 +29,11 @@ const CompCustomer = ({
         <CompIconText imageSrc={LikeIcon}>{customer.liked_cnt}</CompIconText>
         <View style={tw`bg-black w-0 height-12 border-l border-g3 m-1 mr-2`} />
         <CompNotoText style={tw`text-g6 font-12`}>
-          {registered_at} 등록
+          {registered_at.split('T')[0]} 리뷰 등록
         </CompNotoText>
       </View>
-    </>
+    </View>
   );
 };
 
-export default CompCustomer;
+export default React.memo(CompCustomer);

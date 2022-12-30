@@ -4,6 +4,7 @@ import tw from '../../libs/Lib_Tw';
 import CompStarRate from '../common/Comp_StarRate';
 import CompNotoText from '../common/Comp_NotoText';
 import CompRecomandIcon from '../review_comp/Comp_RecomandIcon';
+
 const CompStatCard = ({hospital}: {hospital: HospitalType}) => {
   const scoreType = {
     score_service_clarity: '청결함',
@@ -54,9 +55,9 @@ const CompStatCard = ({hospital}: {hospital: HospitalType}) => {
         </View>
         <View style={tw`flex-row border-t border-g3`}>
           <CompRecomandIcon recommand style={tw`border-r border-g3`}>
-            7
+            {hospital.suggest_cnt}
           </CompRecomandIcon>
-          <CompRecomandIcon> 2</CompRecomandIcon>
+          <CompRecomandIcon>{hospital.unsuggest_cnt}</CompRecomandIcon>
         </View>
       </View>
 
@@ -65,4 +66,4 @@ const CompStatCard = ({hospital}: {hospital: HospitalType}) => {
   );
 };
 
-export default CompStatCard;
+export default React.memo(CompStatCard);

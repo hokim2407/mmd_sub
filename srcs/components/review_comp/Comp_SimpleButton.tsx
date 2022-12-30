@@ -24,7 +24,7 @@ const CompSimpleButton = ({
         tw`bg-white flex-row-center rounded border rounded ${containerStyle}`,
       ]}>
       <>
-        <CompNotoText style={tw`px-1 font-bold text-g7 ${textStyle}`}>
+        <CompNotoText style={tw`px-1 text-g7 ${textStyle}`}>
           {children}
         </CompNotoText>
       </>
@@ -32,4 +32,4 @@ const CompSimpleButton = ({
   );
 };
 
-export default CompSimpleButton;
+export default React.memo(CompSimpleButton);

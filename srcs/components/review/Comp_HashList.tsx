@@ -10,6 +10,7 @@ const CompHashList = ({hashList}: {hashList: TreatmentPerNameType[]}) => {
     {id: 'all', name: '전체'},
     {id: 'search', name: '검색', icon: SearchIcon},
   ].concat();
+
   hashList.map((hash, idx) => {
     hashs.push({id: idx, ...hash});
   });
@@ -63,4 +64,4 @@ const CompHashList = ({hashList}: {hashList: TreatmentPerNameType[]}) => {
   );
 };
 
-export default CompHashList;
+export default React.memo(CompHashList);

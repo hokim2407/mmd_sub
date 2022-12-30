@@ -2,7 +2,6 @@ import React from 'react';
 import {SafeAreaView, StatusBar, Platform, UIManager} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import TestPage from './pages/Page_Test';
 import PageMain from './pages/Page_Main';
 import tw from './libs/Lib_Tw';
 import {color} from './configs/Conf_Style';
@@ -25,6 +24,7 @@ const App = () => {
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen name="Main" component={PageMain} />
+            <Stack.Screen name="ReviewList" component={PageReviewList} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>

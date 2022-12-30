@@ -20,18 +20,18 @@ const CompFoldableText = ({
 
   return (
     <CompNotoText style={[tw`items-center font-14 text-g7`, textStyle]}>
-      {showAll ? text : text.slice(0, 100).replace(/\n/g, ' ') + '...'}
+      {showAll ? text : text.slice(0, 100).replace(/\n/g, ' ')}
       {text.length > 100 && (
         <CompNotoText
           style={[tw`text-black font-semibold font-14`, foldTextStyle]}
           onPress={() => {
             setShowAll(!showAll);
           }}>
-          {showAll ? ' 접기' : ' 더보기'}
+          {showAll ? ' 접기' : ' ...더보기'}
         </CompNotoText>
       )}
     </CompNotoText>
   );
 };
 
-export default CompFoldableText;
+export default React.memo(CompFoldableText);
