@@ -7,6 +7,9 @@ import PageMain from './pages/Page_Main';
 import tw from './libs/Lib_Tw';
 import {color} from './configs/Conf_Style';
 
+import {store} from './context/store';
+import {Provider} from 'react-redux';
+import PageReviewList from './pages/Page_ReviewList';
 const App = () => {
   const Stack = createNativeStackNavigator();
   if (
@@ -16,23 +19,16 @@ const App = () => {
     UIManager.setLayoutAnimationEnabledExperimental(true);
   }
   return (
-    <SafeAreaView style={tw`flex-1`}>
-      <StatusBar backgroundColor={color.p5} />
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Main"
-            options={{headerShown: false}}
-            component={PageMain}
-          />
-          <Stack.Screen
-            name="Test"
-            options={{headerShown: false}}
-            component={TestPage}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaView>
+    <Provider store={store}>
+      <SafeAreaView style={tw`flex-1`}>
+        <StatusBar backgroundColor={color.p5} />
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Main" component={PageMain} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
+    </Provider>
   );
 };
 

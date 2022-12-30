@@ -1,4 +1,5 @@
 type NavProps = NativeStackScreenProps<NavParamList, string>;
+
 declare module '*.png';
 declare module '*.jpg';
 
@@ -53,6 +54,9 @@ interface ReviewType {
   liked_cnt: number;
   // 해당 리뷰에 '도움됐어요' 버튼을 눌렀는지 여부
   already_liked: boolean;
+
+  // 페이지 표시를 위한 추가정보
+  idx: number;
 }
 
 interface TreatmentPerNameType {
@@ -82,4 +86,11 @@ interface HospitalType extends ScoreType {
   total_score: number;
   // 병원의 청결함에 대한 점수
   treatment_prices_count_per_name: TreatmentPerNameType[];
+
+  // 페이지 표시를 위한 추가정보
+  idx: number;
+  suggest_cnt?: number;
+  unsuggest_cnt?: number;
+  review_page: number;
+  reviews: ReviewType[];
 }

@@ -26,4 +26,4 @@ const CompHospitalCard = ({
   );
 };
 
-export default CompHospitalCard;
+export default React.memo(CompHospitalCard);
