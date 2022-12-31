@@ -6,56 +6,49 @@ import HashListCard from '../components/hashCard/Comp_HashList';
 import CompStatCard from '../components/statusCard/Comp_StatCard';
 
 import {useAppSelector, useAppDispatch} from '../context/store';
-import {GetReviewList} from '../apis/API_Reviews';
-import {updateReviewPage} from '../context/Slice_hospitals';
 import ReciptCard from '../components/reciptCard/Comp_ReciptCard';
 import setHeader from '../libs/Lib_setHeader';
-import {setCurKeyword, setCurReview} from '../context/Slice_current';
+import {setCurKeyword} from '../context/Slice_current';
 import {ReviewProvider} from '../components/reviewCard/Context_Review';
 import ReviewContentCard from '../components/reviewCard/Comp_ReviewContentCard';
 import ReviewProfileCard from '../components/reviewCard/Comp_ReviewProfileCard';
 import HrLine from '../components/common/Comp_HrLine';
+import {ReadReviews} from '../libs/Lib_ReadReviews';
 
 const PageReviewList = ({navigation}: NavProps) => {
   const dispatch = useAppDispatch();
-  const hospitalIdx = useAppSelector(state => state.current.hospitalIdx);
   const current = useAppSelector(state => state.current);
   const hospital = useAppSelector(
-    state => state.hospitals.hospitals[hospitalIdx],
+    state => state.hospitals.hospitals[current.hospitalIdx],
   );
-  const reviews = hospital?.reviews;
+  const reviews = useAppSelector(
+    state => state.reviews[current.hospitalIdx]?.reviews,
+  );
+  const pages = useAppSelector(
+    state => state.reviews[current.hospitalIdx]?.pages[current.keyword],
+  );
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const getInfo = useCallback(async () => {
+  const getReviews = useCallback(async () => {
     if (isLoading) return;
     setIsLoading(true);
 
-    try {
-      const reviewList = await GetReviewList(
-        hospital.id,
-        hospital.review_page,
-        current.keyword,
-      );
-      if (reviewList.success) {
-        dispatch(
-          updateReviewPage({
-            idx: hospitalIdx,
-            reviews: reviewList.result.reviews,
-          }),
-        );
-      }
-    } catch (e) {
-      console.log(e);
-    }
+    await ReadReviews(
+      dispatch,
+      hospital,
+      pages ? pages.page + 1 : 1,
+      current.keyword,
+    );
+
     setTimeout(() => {
       setIsLoading(false);
-    }, 1500);
-  }, []);
+    }, 3000);
+  }, [current, pages?.page, isLoading]);
 
   useEffect(() => {
     setHeader(navigation, hospital.name);
-    getInfo();
+    if (!pages || pages.reviewIds.length === 0) getReviews();
     dispatch(setCurKeyword(''));
   }, []);
 
@@ -79,32 +72,28 @@ const PageReviewList = ({navigation}: NavProps) => {
       <></>
     );
   };
+  
 
   return (
     <View style={tw`flex-1 bg-g3`}>
       <View style={tw`shadow`}>
         <HashListCard hashList={hospital.treatment_prices_count_per_name} />
       </View>
-      {reviews.length === 0 ? (
-        <View style={tw`flex-1 flex-center`}>
-          <ActivityIndicator size={30} color="white" />
-        </View>
-      ) : (
+      {pages?.reviewIds.length > 0 ? (
         <FlatList
           removeClippedSubviews
           disableVirtualization={false}
           style={tw`flex-1 bg-g3`}
-          data={reviews}
-          ListFooterComponent={renderLoaderFooter}
-          onEndReached={async () => {
-            if (!hospital.page_end) {
-              await getInfo();
-            }
-          }}
+          data={pages.reviewIds}
           onEndReachedThreshold={0}
+          ItemSeparatorComponent={() => <View style={tw`h-3`} />}
+          keyExtractor={item => reviews[item].id.toString()}
           ListHeaderComponent={renderHeader()}
-          renderItem={({item}) => (
-            <ReviewProvider review={item} navigation={navigation}>
+          renderItem={({item, index}) => (
+            <ReviewProvider
+              review={reviews[item]}
+              reviewIdx={index}
+              navigation={navigation}>
               <View style={tw`bg-white p-6`}>
                 <ReviewContentCard />
                 <HrLine style={tw`my-4`} />
@@ -112,9 +101,17 @@ const PageReviewList = ({navigation}: NavProps) => {
               </View>
             </ReviewProvider>
           )}
-          ItemSeparatorComponent={() => <View style={tw`h-3`} />}
-          keyExtractor={item => item.id.toString()}
+          ListFooterComponent={renderLoaderFooter}
+          onEndReached={async () => {
+            if (!pages?.page_end) {
+              await getReviews();
+            }
+          }}
         />
+      ) : (
+        <View style={tw`flex-1 flex-center`}>
+          <ActivityIndicator size={30} color="white" />
+        </View>
       )}
     </View>
   );

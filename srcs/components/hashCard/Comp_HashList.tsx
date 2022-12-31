@@ -4,7 +4,7 @@ import tw from '../../libs/Lib_Tw';
 import SearchIcon from '../../assets/images/Search.png';
 import Hashtag from './Comp_Hashtag';
 import SearchBar from './Comp_SearchBar';
-import {Search} from '../../libs/Lib_Search';
+import {Search} from '../../libs/Lib_ReadReviews';
 import {useAppDispatch, useAppSelector} from '../../context/store';
 
 const HashListCard = ({hashList}: {hashList: TreatmentPerNameType[]}) => {

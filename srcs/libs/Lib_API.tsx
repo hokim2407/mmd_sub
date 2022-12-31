@@ -7,7 +7,6 @@ const GetAPI = async (url: string) => {
       Authorization: `Bearer ${API_KEY}`,
     },
   });
-  console.log(response.status);
   const result = await response.json();
   if (response.status !== 200) {
     return {success: false, error: result};

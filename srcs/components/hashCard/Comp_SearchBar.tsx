@@ -6,8 +6,7 @@ import SearchIcon from '../../assets/images/Search.png';
 import CancelIcon from '../../assets/images/Cancel.png';
 import {color} from '../../configs/Conf_Style';
 import {useAppSelector, useAppDispatch} from '../../context/store';
-import {resetReviewPage} from '../../context/Slice_hospitals';
-import {Search} from '../../libs/Lib_Search';
+import {Search} from '../../libs/Lib_ReadReviews';
 
 const SearchBar = () => {
   const dispatch = useAppDispatch();
@@ -42,7 +41,7 @@ const SearchBar = () => {
             color={color.p5}
             style={{width: 22, height: 22}}
             onPress={async () => {
-              dispatch(resetReviewPage({idx: hospital.idx}));
+              // TODO : 검색 기능 추가
               await Search(dispatch, hospital, keyword);
             }}
           />

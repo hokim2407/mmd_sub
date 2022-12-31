@@ -5,12 +5,8 @@ import tw from '../libs/Lib_Tw';
 
 import {useAppSelector, useAppDispatch} from '../context/store';
 import setHeader from '../libs/Lib_setHeader';
-import IconImage from '../components/common/Comp_IconImage';
-import Comp_ReviewCard from '../components/reviewCard/Comp_ReviewContentCard';
-import Comp_Customer from '../components/reviewCard/review_comp/Comp_Customer';
 import LikeButton from '../components/reviewCard/review_comp/Comp_LikeButton';
 import Comp_StarCard from '../components/statusCard/Comp_StarCard';
-import NotoText from '../components/common/Comp_NotoText';
 import Comp_SimpleButton from '../components/common/Comp_SimpleButton';
 import {decreaseCurReview, increaseCurReview} from '../context/Slice_current';
 import ReviewProfileCard from '../components/reviewCard/Comp_ReviewProfileCard';
@@ -24,41 +20,48 @@ const PageReviewDetail = ({navigation}: NavProps) => {
   const hospital = useAppSelector(
     state => state.hospitals.hospitals[current.hospitalIdx],
   );
-  const review = useAppSelector(
+  const reviews = useAppSelector(
+    state => state.reviews[current.hospitalIdx].reviews,
+  );
+  const reviewIds = useAppSelector(
     state =>
-      state.hospitals.hospitals[current.hospitalIdx].reviews[current.reviewIdx],
+      state.reviews[current.hospitalIdx].pages[current.keyword].reviewIds,
   );
   useEffect(() => {
     setHeader(navigation, hospital.name);
-  }, [hospital.name, navigation]);
+  }, []);
 
   return (
     <ScrollView
       style={tw`flex-1 bg-white`}
       contentContainerStyle={tw`grow p-6`}>
-      <ReviewProvider review={review} navigation={navigation}>
-        {/* 프로필 시작 */}
-        <ReviewProfileCard showButton={false} />
-        {/* 프로필 끝 */}
+      {reviews[reviewIds[current.reviewIdx]] && (
+        <ReviewProvider
+          reviewIdx={current.reviewIdx}
+          review={reviews[reviewIds[current.reviewIdx]]}
+          navigation={navigation}>
+          {/* 프로필 시작 */}
+          <ReviewProfileCard showButton={false} />
+          {/* 프로필 끝 */}
 
-        <HrLine style={tw`bg-white my-3`} />
+          <HrLine style={tw`bg-white my-3`} />
 
-        {/* 리뷰 시작 */}
-        <View style={tw`bg-white py-3`}>
-          <ReviewContentCard foldable={false} />
-        </View>
-        {/* 리뷰 끝 */}
+          {/* 리뷰 시작 */}
+          <View style={tw`bg-white py-3`}>
+            <ReviewContentCard foldable={false} />
+          </View>
+          {/* 리뷰 끝 */}
 
-        {/* 별점 시작 */}
-        <View style={tw`bg-white`}>
-          <Comp_StarCard />
-        </View>
-        {/* 별점 끝 */}
-        {/* 좋아요 버튼 시작 */}
-        <LikeButton mode="dark" showDetail={true} />
-        {/* 좋아요 버튼 시작 */}
-      </ReviewProvider>
-
+          {/* 별점 시작 */}
+          <View style={tw`bg-white`}>
+            <Comp_StarCard />
+          </View>
+          {/* 별점 끝 */}
+          {/* 좋아요 버튼 시작 */}
+          <LikeButton mode="dark" showDetail={true} />
+          {/* 좋아요 버튼 시작 */}
+        </ReviewProvider>
+      )}
       <HrLine style={tw`bg-white mt-4 pb-2 `} />
 
       {/* 이전이후버튼 시작 */}
@@ -74,7 +77,7 @@ const PageReviewDetail = ({navigation}: NavProps) => {
         ) : (
           <View />
         )}
-        {current.reviewIdx < hospital.reviews.length ? (
+        {current.reviewIdx < reviewIds.length ? (
           <Comp_SimpleButton
             mode="big"
             onPress={() => {
