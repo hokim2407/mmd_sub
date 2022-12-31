@@ -5,6 +5,7 @@ declare module '*.jpg';
 
 declare module '@env' {
   export const API_KEY: string;
+  export const MAX_SIZE: number;
 }
 
 interface CustomerType {

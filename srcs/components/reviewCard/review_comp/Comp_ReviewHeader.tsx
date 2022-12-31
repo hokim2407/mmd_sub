@@ -45,10 +45,10 @@ const ReviewHeader = () => {
             <SepText textColor={color.p4}>재방문 의사 있음</SepText>
           )}
           {review?.visited_at !== undefined && (
-            <SepText textColor={color.g4}>{review?.visited_at}</SepText>
+            <SepText textColor={color.g6}>{review?.visited_at}</SepText>
           )}
         </View>
-        <NotoText style={tw`text-[${color.g6}] font-13`}>
+        <NotoText style={tw`text-g6 font-13`}>
           의사:{review.doctor_name}
         </NotoText>
       </View>
