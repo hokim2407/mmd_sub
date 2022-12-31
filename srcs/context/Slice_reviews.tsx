@@ -64,6 +64,17 @@ const reviewsSlice = createSlice({
     ) => {
       const hospitalIdx = action.payload.hospitalIdx;
       const keyword = action.payload.keyword;
+      // 초기화
+      if (!state[hospitalIdx]) {
+        state[hospitalIdx] = {reviews: {}, pages: {}};
+      }
+      if (!state[hospitalIdx].pages[keyword]) {
+        state[hospitalIdx].pages[keyword] = {
+          page: 0,
+          page_end: false,
+          reviewIds: [],
+        };
+      }
       state[hospitalIdx].pages[keyword].page_end = true;
     },
 

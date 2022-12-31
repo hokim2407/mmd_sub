@@ -12,7 +12,6 @@ const GetReviewList = async (
   if (search_query && search_query !== '') {
     opt.push(`search_query=${search_query}`);
   }
-  
   return await GetAPI(
     `https://recruit.modoodoc.com/hospitals/${hospitalId}/reviews/?${opt.join(
       '&',

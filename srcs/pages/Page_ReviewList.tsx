@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useCallback} from 'react';
-import {View} from 'react-native';
+import {Keyboard, View} from 'react-native';
 import {FlatList, ActivityIndicator} from 'react-native';
 import tw from '../libs/Lib_Tw';
 import HashListCard from '../components/hashCard/Comp_HashList';
@@ -72,7 +72,6 @@ const PageReviewList = ({navigation}: NavProps) => {
       <></>
     );
   };
-  
 
   return (
     <View style={tw`flex-1 bg-g3`}>

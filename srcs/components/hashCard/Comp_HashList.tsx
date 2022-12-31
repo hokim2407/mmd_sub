@@ -4,28 +4,48 @@ import tw from '../../libs/Lib_Tw';
 import SearchIcon from '../../assets/images/Search.png';
 import Hashtag from './Comp_Hashtag';
 import SearchBar from './Comp_SearchBar';
-import {Search} from '../../libs/Lib_ReadReviews';
+import {ReadReviews} from '../../libs/Lib_ReadReviews';
 import {useAppDispatch, useAppSelector} from '../../context/store';
+import {setCurKeyword} from '../../context/Slice_current';
 
 const HashListCard = ({hashList}: {hashList: TreatmentPerNameType[]}) => {
   const dispatch = useAppDispatch();
-  const currnet = useAppSelector(store => store.current);
+  const current = useAppSelector(store => store.current);
   const hospital = useAppSelector(
-    store => store.hospitals.hospitals[currnet.hospitalIdx],
+    store => store.hospitals.hospitals[current.hospitalIdx],
   );
-  const hashs: HashType[] = [
-    {id: 'all', name: '전체', keywords: ''},
-    {id: 'search', name: '검색', icon: SearchIcon},
-  ].concat();
+  const reviewPages = useAppSelector(
+    state => state.reviews[current.hospitalIdx]?.pages,
+  );
 
-  hashList.map((hash, idx) => {
-    hashs.push({id: idx, ...hash});
-  });
+  const hashs: HashType[] = [
+    {id: 'all', name: '전체'},
+    {id: 'search', name: '검색', icon: SearchIcon},
+    ...hashList.map((hash, idx) => {
+      return {id: idx, ...hash};
+    }),
+  ];
+
   const [curHash, setCurHash] = useState(hashs[0].id);
 
   useEffect(() => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
   }, [curHash]);
+
+  const onPress = (hash: HashType) => {
+    return async () => {
+      setCurHash(hash.id);
+      if (hash.id === 'search') {
+        return;
+      }
+      const keyword = hash.name === '전체' ? '' : hash.name;
+      dispatch(setCurKeyword(keyword));
+      if (reviewPages?.[keyword]) {
+        return;
+      }
+      await ReadReviews(dispatch, hospital, 1, keyword);
+    };
+  };
 
   return (
     <View style={tw`shadow`}>
@@ -41,16 +61,7 @@ const HashListCard = ({hashList}: {hashList: TreatmentPerNameType[]}) => {
                 <Hashtag
                   iconSrc={hash.icon}
                   choiced={curHash === hash.id}
-                  onPress={() => {
-                    setCurHash(hash.id);
-                    if (hash.id === 'search') {
-                      return;
-                    }
-                    if (hash.id === '전체') {
-                      return Search(dispatch, hospital, '');
-                    }
-                    Search(dispatch, hospital, hash.name);
-                  }}>
+                  onPress={onPress(hash)}>
                   {hash.name} {hash.count && hash.count}
                 </Hashtag>
               </View>

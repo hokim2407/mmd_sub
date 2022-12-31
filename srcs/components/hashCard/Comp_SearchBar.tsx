@@ -6,13 +6,16 @@ import SearchIcon from '../../assets/images/Search.png';
 import CancelIcon from '../../assets/images/Cancel.png';
 import {color} from '../../configs/Conf_Style';
 import {useAppSelector, useAppDispatch} from '../../context/store';
-import {Search} from '../../libs/Lib_ReadReviews';
+import {ReadReviews} from '../../libs/Lib_ReadReviews';
 
 const SearchBar = () => {
   const dispatch = useAppDispatch();
   const current = useAppSelector(state => state.current);
   const hospital = useAppSelector(
     state => state.hospitals.hospitals[current.hospitalIdx],
+  );
+  const reviewPages = useAppSelector(
+    state => state.reviews[current.hospitalIdx]?.pages,
   );
   const [keyword, setKeyword] = useState(current.keyword);
 
@@ -41,8 +44,11 @@ const SearchBar = () => {
             color={color.p5}
             style={{width: 22, height: 22}}
             onPress={async () => {
-              // TODO : 검색 기능 추가
-              await Search(dispatch, hospital, keyword);
+              let page = 1;
+              if (reviewPages?.[keyword]) {
+                page = reviewPages[keyword].page + 1;
+              }
+              await ReadReviews(dispatch, hospital, page, keyword);
             }}
           />
         </View>

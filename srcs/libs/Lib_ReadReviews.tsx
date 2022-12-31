@@ -10,7 +10,6 @@ const ReadReviews = async (
   reviewPage: number,
   keyword: string,
 ) => {
-  // TODO: 디스패치 변경
   dispatch(setCurKeyword(keyword));
   const reviewList = await GetReviewList(hospital.id, reviewPage, keyword);
   if (reviewList.success) {
