@@ -3,6 +3,7 @@ export const color = {
   p4: '#9470BE',
   p5: '#4C1192',
 
+  's4-30': '#FFD1004D',
   s4: '#FFD100',
   s5: '#F4B200',
 

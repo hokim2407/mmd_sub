@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import tw from '../../../libs/Lib_Tw';
 import NotoText from '../../common/Comp_NotoText';
@@ -8,8 +8,22 @@ import {color} from '../../../configs/Conf_Style';
 import Hashtag from '../../hashCard/Comp_Hashtag';
 import SepText from '../../common/Comp_SepText';
 import {useReviewContext} from '../Context_Review';
+import {useAppSelector} from '../../../context/store';
+import highlightText from '../../../libs/Lib_Highlight';
 const ReviewHeader = () => {
   const {review, redirectDetail} = useReviewContext();
+  const current = useAppSelector(state => state.current);
+  const [title, setTitle] = useState<JSX.Element>();
+
+  useEffect(() => {
+    setTitle(
+      highlightText(
+        review.treatment_prices.map(elem => elem.name).join('/'),
+        current.keyword,
+        tw`text-black font-bold text-base font-16`,
+      ),
+    );
+  }, [current.keyword]);
 
   return (
     <TouchableOpacity
@@ -23,7 +37,7 @@ const ReviewHeader = () => {
       </View>
       <View style={tw`my-4`}>
         <NotoText style={tw`text-black font-bold text-base font-16`}>
-          받은 진료 : {review.treatment_prices[0].name}
+          받은 진료 : {title}
         </NotoText>
         <View style={tw`flex-row items-center`}>
           <StarRate rate={review.total_score} showRate />

@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {StyleProp, ViewStyle, LayoutAnimation} from 'react-native';
+import {StyleProp, ViewStyle, LayoutAnimation, Keyboard} from 'react-native';
 import NotoText from './Comp_NotoText';
 import tw from '../../libs/Lib_Tw';
+import {useAppSelector} from '../../context/store';
+import highlightText from '../../libs/Lib_Highlight';
 
 const FoldableText = ({
   text,
@@ -14,15 +16,25 @@ const FoldableText = ({
   foldTextStyle?: StyleProp<ViewStyle>;
   foldable?: boolean;
 }) => {
-  const [showAll, setShowAll] = useState(text.length <= 100);
+  const current = useAppSelector(state => state.current);
+  const [showAll, setShowAll] = useState(false);
+  const [shortText, setShortText] = useState<JSX.Element>();
+  const [fullText, setFullText] = useState<JSX.Element>();
 
   useEffect(() => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
   }, [showAll]);
 
+  useEffect(() => {
+    setShortText(
+      highlightText(text.slice(0, 100).replace(/\n/g, ' '), current.keyword),
+    );
+    setFullText(highlightText(text, current.keyword));
+  }, [current.keyword]);
+
   return (
     <NotoText style={[tw`items-center font-14 text-g7`, textStyle]}>
-      {!foldable || showAll ? text : text.slice(0, 100).replace(/\n/g, ' ')}
+      {!foldable || showAll ? fullText : shortText}
       {foldable && text.length > 100 && (
         <NotoText
           style={[tw`text-black font-semibold font-14`, foldTextStyle]}
