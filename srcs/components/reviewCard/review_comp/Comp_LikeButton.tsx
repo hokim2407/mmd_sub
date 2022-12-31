@@ -46,8 +46,15 @@ const LikeButton = ({
     <>
       {showDetail && (
         <NotoText style={tw`text-g7 font-12 underline pt-6 pb-4`}>
-          <NotoText style={tw`font-bold`}>{review.liked_cnt}</NotoText>
-          명의 회원에게 도움이 되었어요!
+          {review.liked_cnt === 0 ? (
+            '리뷰가 도움이 되셨나요?'
+          ) : (
+            <>
+              {' '}
+              <NotoText style={tw`font-bold`}>{review.liked_cnt}</NotoText>
+              명의 회원에게 도움이 되었어요!
+            </>
+          )}
         </NotoText>
       )}
       <TouchableOpacity
