@@ -7,6 +7,7 @@ import LikeFullIcon from '../../../assets/images/Like_Full.png';
 import {color} from '../../../configs/Conf_Style';
 import {useReviewContext} from '../Context_Review';
 import IconText from '../../common/Comp_IconText';
+import {useAppSelector} from '../../../context/Store';
 
 const LikeButton = ({
   mode = 'light',
@@ -18,6 +19,7 @@ const LikeButton = ({
   boxStyle?: StyleProp<ViewStyle>;
 }) => {
   const {review, updateLike} = useReviewContext();
+  const current = useAppSelector(state => state.current);
   const containerStyle =
     mode === 'light'
       ? 'bg-white border-g3 border align-center py-2 px-3'
@@ -27,8 +29,8 @@ const LikeButton = ({
   const textStyle = mode === 'light' ? 'text-g7 font-13' : 'text-white font-14';
 
   const onPress = useCallback(() => {
-    updateLike();
-  }, []);
+    updateLike(mode === 'light' ? undefined : current.reviewIdx);
+  }, [current.reviewIdx]);
 
   const CompHeartIcon = () => (
     <IconText

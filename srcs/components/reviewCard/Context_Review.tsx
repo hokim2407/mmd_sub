@@ -5,7 +5,7 @@ import {updateLiked} from '../../context/Slice_Reviews';
 
 type ReviewContextType = {
   review: ReviewType;
-  updateLike: () => void;
+  updateLike: (setReviewIdx?: number) => void;
   redirectDetail: () => void;
 };
 
@@ -25,7 +25,10 @@ const ReviewProvider = React.memo(
     reviewIdx: number;
     navigation: NavProps;
   }) => {
-    const {hospitalIdx} = useAppSelector(state => state.current);
+    const current = useAppSelector(state => state.current);
+    const reviewPages = useAppSelector(
+      state => state.reviews[current.hospitalIdx].pages[current.keyword],
+    );
     const dispatch = useAppDispatch();
 
     const redirectDetail = () => {
@@ -33,8 +36,15 @@ const ReviewProvider = React.memo(
       navigation.push('ReviewDetail');
     };
 
-    const updateLike = () => {
-      dispatch(updateLiked({hospitalIdx, reviewId: review.id}));
+    const updateLike = (setReviewIdx: number | undefined) => {
+      dispatch(
+        updateLiked({
+          hospitalIdx: current.hospitalIdx,
+          reviewId: setReviewIdx
+            ? reviewPages.reviewIds[setReviewIdx]
+            : review.id,
+        }),
+      );
     };
 
     return (

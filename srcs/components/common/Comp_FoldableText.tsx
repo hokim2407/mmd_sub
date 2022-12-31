@@ -22,7 +22,8 @@ const FoldableText = ({
   const [fullText, setFullText] = useState<JSX.Element>();
 
   useEffect(() => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    if (foldable)
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
   }, [showAll]);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ const FoldableText = ({
       highlightText(text.slice(0, 100).replace(/\n/g, ' '), current.keyword),
     );
     setFullText(highlightText(text, current.keyword));
-  }, [current.keyword]);
+  }, [current.keyword, text]);
 
   return (
     <NotoText style={[tw`items-center font-14 text-g7`, textStyle]}>

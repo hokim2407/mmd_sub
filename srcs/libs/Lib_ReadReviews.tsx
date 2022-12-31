@@ -12,9 +12,9 @@ const ReadReviews = async (
   keyword: string,
 ) => {
   dispatch(setCurKeyword(keyword));
-
+  let readSuggest;
   if (!hospital.suggest_cnt) {
-    await ReadReviewsSuggetCnt(dispatch, hospital, keyword);
+    readSuggest = ReadReviewsSuggetCnt(dispatch, hospital, keyword);
   }
   const reviewList = await GetReviewList(hospital.id, reviewPage, keyword);
   if (reviewList.success) {
@@ -30,6 +30,10 @@ const ReadReviews = async (
         reviews: reviewList.result.reviews,
       }),
     );
+  }
+
+  if (readSuggest) {
+    await readSuggest;
   }
 };
 

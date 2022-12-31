@@ -13,6 +13,7 @@ import ReviewProfileCard from '../components/reviewCard/Comp_ReviewProfileCard';
 import ReviewContentCard from '../components/reviewCard/Comp_ReviewContentCard';
 import {ReviewProvider} from '../components/reviewCard/Context_Review';
 import HrLine from '../components/common/Comp_HrLine';
+import {ReadReviews} from '../libs/Lib_ReadReviews';
 
 const PageReviewDetail = ({navigation}: NavProps) => {
   const dispatch = useAppDispatch();
@@ -23,22 +24,26 @@ const PageReviewDetail = ({navigation}: NavProps) => {
   const reviews = useAppSelector(
     state => state.reviews[current.hospitalIdx].reviews,
   );
-  const reviewIds = useAppSelector(
-    state =>
-      state.reviews[current.hospitalIdx].pages[current.keyword].reviewIds,
+  const pages = useAppSelector(
+    state => state.reviews[current.hospitalIdx].pages[current.keyword],
   );
   useEffect(() => {
     SetHeaderOpt(navigation, hospital.name);
   }, []);
 
+  useEffect(() => {
+    if (current.reviewIdx === pages.reviewIds.length - 2 && !pages.page_end)
+      ReadReviews(dispatch, hospital, pages.page + 1, current.keyword);
+  }, [current.reviewIdx]);
+
   return (
     <ScrollView
       style={tw`flex-1 bg-white`}
       contentContainerStyle={tw`grow p-6`}>
-      {reviews[reviewIds[current.reviewIdx]] && (
+      {reviews[pages.reviewIds[current.reviewIdx]] && (
         <ReviewProvider
           reviewIdx={current.reviewIdx}
-          review={reviews[reviewIds[current.reviewIdx]]}
+          review={reviews[pages.reviewIds[current.reviewIdx]]}
           navigation={navigation}>
           {/* 프로필 시작 */}
           <ReviewProfileCard showButton={false} />
@@ -77,7 +82,7 @@ const PageReviewDetail = ({navigation}: NavProps) => {
         ) : (
           <View />
         )}
-        {current.reviewIdx < reviewIds.length ? (
+        {current.reviewIdx < pages.reviewIds.length - 1 ? (
           <Comp_SimpleButton
             mode="big"
             onPress={() => {

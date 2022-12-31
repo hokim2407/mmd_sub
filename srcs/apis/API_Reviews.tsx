@@ -16,6 +16,7 @@ const GetReviewList = async (
   if (size) {
     opt.push(`size=${size}`);
   }
+  console.log(opt);
   return await GetAPI(
     `https://recruit.modoodoc.com/hospitals/${hospitalId}/reviews/?${opt.join(
       '&',
