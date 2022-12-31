@@ -30,7 +30,7 @@ const ReviewHeader = () => {
           {review?.suggest === true && (
             <SepText textColor={color.p4}>재방문 의사 있음</SepText>
           )}
-          {review?.visited_at && (
+          {review?.visited_at !== undefined && (
             <SepText textColor={color.g4}>{review?.visited_at}</SepText>
           )}
         </View>
