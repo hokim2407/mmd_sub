@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {RootState} from './store';
+import {RootState} from './Store';
 
 const initialState: {hospitals: HospitalType[]} = {hospitals: []};
 
@@ -14,9 +14,6 @@ const hospitalsSlice = createSlice({
       state.hospitals = state.hospitals.concat(
         action.payload.map((hospital, idx) => {
           hospital.idx = originIdx + idx;
-          hospital.review_page = 1;
-          hospital.page_end = false;
-          hospital.reviews = [];
           return hospital;
         }),
       );

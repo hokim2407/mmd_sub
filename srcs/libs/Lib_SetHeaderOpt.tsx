@@ -1,6 +1,6 @@
 import tw from './Lib_Tw';
 
-const setHeader = (navigation: NavProps, title: string) => {
+const SetHeaderOpt = (navigation: NavProps, title: string) => {
   navigation.setOptions({
     title: title,
     headerStyle: tw`bg-p5`,
@@ -9,4 +9,4 @@ const setHeader = (navigation: NavProps, title: string) => {
     headerTitleStyle: tw`w-full text-white font-bold font-14`,
   });
 };
-export default setHeader;
+export default SetHeaderOpt;

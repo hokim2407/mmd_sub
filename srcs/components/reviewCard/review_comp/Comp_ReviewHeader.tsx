@@ -8,7 +8,7 @@ import {color} from '../../../configs/Conf_Style';
 import Hashtag from '../../hashCard/Comp_Hashtag';
 import SepText from '../../common/Comp_SepText';
 import {useReviewContext} from '../Context_Review';
-import {useAppSelector} from '../../../context/store';
+import {useAppSelector} from '../../../context/Store';
 import highlightText from '../../../libs/Lib_Highlight';
 const ReviewHeader = () => {
   const {review, redirectDetail} = useReviewContext();

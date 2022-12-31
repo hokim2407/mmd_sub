@@ -4,6 +4,7 @@ const GetReviewList = async (
   hospitalId: number,
   page: number,
   search_query?: string,
+  size?: number,
 ) => {
   const opt = [];
   if (page) {
@@ -11,6 +12,9 @@ const GetReviewList = async (
   }
   if (search_query && search_query !== '') {
     opt.push(`search_query=${search_query}`);
+  }
+  if (size) {
+    opt.push(`size=${size}`);
   }
   return await GetAPI(
     `https://recruit.modoodoc.com/hospitals/${hospitalId}/reviews/?${opt.join(

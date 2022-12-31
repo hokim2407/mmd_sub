@@ -1,8 +1,8 @@
 import {GetReviewList} from '../apis/API_Reviews';
 
-import {AppDispatch} from '../context/store';
-import {setCurKeyword} from '../context/Slice_current';
-import {setEndReviews, setReviews} from '../context/Slice_reviews';
+import {AppDispatch} from '../context/Store';
+import {setCurKeyword} from '../context/Slice_Current';
+import {setEndReviews, setReviews} from '../context/Slice_Reviews';
 
 const ReadReviews = async (
   dispatch: AppDispatch,

@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import tw from '../../libs/Lib_Tw';
 import StarRate from '../common/Comp_StarRate';
 import NotoText from '../common/Comp_NotoText';
-import {useAppSelector} from '../../context/store';
+import {useAppSelector} from '../../context/Store';
 const CompStarCard = () => {
   const current = useAppSelector(state => state.current);
   const hospital = useAppSelector(

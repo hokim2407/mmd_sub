@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
-import {useAppDispatch, useAppSelector} from '../../context/store';
-import {setCurReview} from '../../context/Slice_current';
-import {updateLiked} from '../../context/Slice_reviews';
+import {useAppDispatch, useAppSelector} from '../../context/Store';
+import {setCurReview} from '../../context/Slice_Current';
+import {updateLiked} from '../../context/Slice_Reviews';
 
 type ReviewContextType = {
   review: ReviewType;

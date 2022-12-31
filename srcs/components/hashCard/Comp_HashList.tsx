@@ -5,8 +5,8 @@ import SearchIcon from '../../assets/images/Search.png';
 import Hashtag from './Comp_Hashtag';
 import SearchBar from './Comp_SearchBar';
 import {ReadReviews} from '../../libs/Lib_ReadReviews';
-import {useAppDispatch, useAppSelector} from '../../context/store';
-import {setCurKeyword} from '../../context/Slice_current';
+import {useAppDispatch, useAppSelector} from '../../context/Store';
+import {setCurKeyword} from '../../context/Slice_Current';
 
 const HashListCard = ({hashList}: {hashList: TreatmentPerNameType[]}) => {
   const dispatch = useAppDispatch();

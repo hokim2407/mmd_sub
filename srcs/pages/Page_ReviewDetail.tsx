@@ -3,12 +3,12 @@ import {View} from 'react-native';
 import {ScrollView} from 'react-native';
 import tw from '../libs/Lib_Tw';
 
-import {useAppSelector, useAppDispatch} from '../context/store';
-import setHeader from '../libs/Lib_setHeader';
+import {useAppSelector, useAppDispatch} from '../context/Store';
+import SetHeaderOpt from '../libs/Lib_SetHeaderOpt';
 import LikeButton from '../components/reviewCard/review_comp/Comp_LikeButton';
 import Comp_StarCard from '../components/statusCard/Comp_StarCard';
 import Comp_SimpleButton from '../components/common/Comp_SimpleButton';
-import {decreaseCurReview, increaseCurReview} from '../context/Slice_current';
+import {decreaseCurReview, increaseCurReview} from '../context/Slice_Current';
 import ReviewProfileCard from '../components/reviewCard/Comp_ReviewProfileCard';
 import ReviewContentCard from '../components/reviewCard/Comp_ReviewContentCard';
 import {ReviewProvider} from '../components/reviewCard/Context_Review';
@@ -28,7 +28,7 @@ const PageReviewDetail = ({navigation}: NavProps) => {
       state.reviews[current.hospitalIdx].pages[current.keyword].reviewIds,
   );
   useEffect(() => {
-    setHeader(navigation, hospital.name);
+    SetHeaderOpt(navigation, hospital.name);
   }, []);
 
   return (

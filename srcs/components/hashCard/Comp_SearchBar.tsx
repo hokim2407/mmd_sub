@@ -5,7 +5,7 @@ import IconImage from '../common/Comp_IconImage';
 import SearchIcon from '../../assets/images/Search.png';
 import CancelIcon from '../../assets/images/Cancel.png';
 import {color} from '../../configs/Conf_Style';
-import {useAppSelector, useAppDispatch} from '../../context/store';
+import {useAppSelector, useAppDispatch} from '../../context/Store';
 import {ReadReviews} from '../../libs/Lib_ReadReviews';
 
 const SearchBar = () => {

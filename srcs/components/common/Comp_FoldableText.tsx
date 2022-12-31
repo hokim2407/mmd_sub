@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {StyleProp, ViewStyle, LayoutAnimation, Keyboard} from 'react-native';
 import NotoText from './Comp_NotoText';
 import tw from '../../libs/Lib_Tw';
-import {useAppSelector} from '../../context/store';
+import {useAppSelector} from '../../context/Store';
 import highlightText from '../../libs/Lib_Highlight';
 
 const FoldableText = ({

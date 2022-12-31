@@ -6,7 +6,7 @@ import PageMain from './pages/Page_Main';
 import tw from './libs/Lib_Tw';
 import {color} from './configs/Conf_Style';
 
-import {store} from './context/store';
+import {store} from './context/Store';
 import {Provider} from 'react-redux';
 import PageReviewList from './pages/Page_ReviewList';
 import PageReviewDetail from './pages/Page_ReviewDetail';

@@ -5,10 +5,10 @@ import {FlatList} from 'react-native';
 import tw from '../libs/Lib_Tw';
 import {GetHospitalList} from '../apis/API_Hospitals';
 
-import {useAppSelector, useAppDispatch} from '../context/store';
-import {setHospitals} from '../context/Slice_hospitals';
-import setHeader from '../libs/Lib_setHeader';
-import {setCurHospital} from '../context/Slice_current';
+import {useAppSelector, useAppDispatch} from '../context/Store';
+import {setHospitals} from '../context/Slice_Hospitals';
+import SetHeaderOpt from '../libs/Lib_SetHeaderOpt';
+import {setCurHospital} from '../context/Slice_Current';
 
 const PageMain = ({navigation}: NavProps) => {
   const hospitals = useAppSelector(state => state.hospitals.hospitals);
@@ -30,7 +30,7 @@ const PageMain = ({navigation}: NavProps) => {
 
   useEffect(() => {
     getInfo();
-    setHeader(navigation, 'ㅁㄷㄷ');
+    SetHeaderOpt(navigation, 'ㅁㄷㄷ');
   }, [navigation, getInfo]);
 
   const onCardPress = (hospital: HospitalType) => {

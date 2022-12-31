@@ -5,10 +5,10 @@ import tw from '../libs/Lib_Tw';
 import HashListCard from '../components/hashCard/Comp_HashList';
 import CompStatCard from '../components/statusCard/Comp_StatCard';
 
-import {useAppSelector, useAppDispatch} from '../context/store';
+import {useAppSelector, useAppDispatch} from '../context/Store';
 import ReciptCard from '../components/reciptCard/Comp_ReciptCard';
-import setHeader from '../libs/Lib_setHeader';
-import {setCurKeyword} from '../context/Slice_current';
+import SetHeaderOpt from '../libs/Lib_SetHeaderOpt';
+import {setCurKeyword} from '../context/Slice_Current';
 import {ReviewProvider} from '../components/reviewCard/Context_Review';
 import ReviewContentCard from '../components/reviewCard/Comp_ReviewContentCard';
 import ReviewProfileCard from '../components/reviewCard/Comp_ReviewProfileCard';
@@ -47,7 +47,7 @@ const PageReviewList = ({navigation}: NavProps) => {
   }, [current, pages?.page, isLoading]);
 
   useEffect(() => {
-    setHeader(navigation, hospital.name);
+    SetHeaderOpt(navigation, hospital.name);
     if (!pages || pages.reviewIds.length === 0) getReviews();
     dispatch(setCurKeyword(''));
   }, []);
