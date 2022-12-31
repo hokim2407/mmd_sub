@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, StyleProp, ViewStyle} from 'react-native';
 import tw from '../../libs/Lib_Tw';
 
-const CompNotoText = ({
+const NotoText = ({
   children,
   style = {},
   onPress,
@@ -18,4 +18,4 @@ const CompNotoText = ({
   );
 };
 
-export default CompNotoText;
+export default NotoText;

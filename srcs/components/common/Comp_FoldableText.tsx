@@ -1,16 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import {StyleProp, ViewStyle, LayoutAnimation} from 'react-native';
-import CompNotoText from './Comp_NotoText';
+import NotoText from './Comp_NotoText';
 import tw from '../../libs/Lib_Tw';
 
-const CompFoldableText = ({
+const FoldableText = ({
   text,
   textStyle = {},
   foldTextStyle = {},
+  foldable = true,
 }: {
   text: string;
   textStyle?: StyleProp<ViewStyle>;
   foldTextStyle?: StyleProp<ViewStyle>;
+  foldable?: boolean;
 }) => {
   const [showAll, setShowAll] = useState(text.length <= 100);
 
@@ -19,19 +21,19 @@ const CompFoldableText = ({
   }, [showAll]);
 
   return (
-    <CompNotoText style={[tw`items-center font-14 text-g7`, textStyle]}>
-      {showAll ? text : text.slice(0, 100).replace(/\n/g, ' ')}
-      {text.length > 100 && (
-        <CompNotoText
+    <NotoText style={[tw`items-center font-14 text-g7`, textStyle]}>
+      {!foldable || showAll ? text : text.slice(0, 100).replace(/\n/g, ' ')}
+      {foldable && text.length > 100 && (
+        <NotoText
           style={[tw`text-black font-semibold font-14`, foldTextStyle]}
           onPress={() => {
             setShowAll(!showAll);
           }}>
           {showAll ? ' 접기' : ' ...더보기'}
-        </CompNotoText>
+        </NotoText>
       )}
-    </CompNotoText>
+    </NotoText>
   );
 };
 
-export default React.memo(CompFoldableText);
+export default React.memo(FoldableText);

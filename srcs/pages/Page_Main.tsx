@@ -1,6 +1,6 @@
 import React, {useEffect, useCallback} from 'react';
 import {View, ActivityIndicator} from 'react-native';
-import CompHospitalCard from '../components/main/Comp_HospitalCard';
+import HospitalCard from '../components/hospitalCard/Comp_HospitalCard';
 import {FlatList} from 'react-native';
 import tw from '../libs/Lib_Tw';
 import {GetHospitalList} from '../apis/API_Hospitals';
@@ -42,7 +42,7 @@ const PageMain = ({navigation}: NavProps) => {
 
   const renderItem = ({item}: {item: HospitalType}) => (
     <View style={tw`mb-2`}>
-      <CompHospitalCard
+      <HospitalCard
         name={item.name}
         rate={item.total_score}
         onPress={onCardPress(item)}

@@ -69,7 +69,7 @@ module.exports = {
     plugin(({addUtilities}) => {
       addUtilities({
         // inline-block
-        'aline-center': {
+        'align-center': {
           alignSelf: 'center',
         },
         ...layoutStyle,

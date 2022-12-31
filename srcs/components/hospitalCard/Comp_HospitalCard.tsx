@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import tw from '../../libs/Lib_Tw';
-import CompNotoText from '../common/Comp_NotoText';
-import CompStarRate from '../common/Comp_StarRate';
+import NotoText from '../common/Comp_NotoText';
+import StarRate from '../common/Comp_StarRate';
 
-const CompHospitalCard = ({
+const HospitalCard = ({
   name,
   rate,
   onPress,
@@ -19,11 +19,11 @@ const CompHospitalCard = ({
       activeOpacity={0.5}
       onPress={onPress}>
       <View style={tw`flex-1`}>
-        <CompNotoText style={tw`text-base font-14 mb-1`}>{name}</CompNotoText>
-        <CompStarRate rate={rate} showRate={true} />
+        <NotoText style={tw`text-base font-14 mb-1`}>{name}</NotoText>
+        <StarRate rate={rate} showRate={true} />
       </View>
     </TouchableOpacity>
   );
 };
 
-export default React.memo(CompHospitalCard);
+export default React.memo(HospitalCard);

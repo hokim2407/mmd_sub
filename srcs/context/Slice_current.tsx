@@ -1,10 +1,12 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RootState} from './store';
 
-const initialState: {hospitalIdx: number; reviewIdx: number} = {
-  hospitalIdx: 0,
-  reviewIdx: 0,
-};
+const initialState: {hospitalIdx: number; reviewIdx: number; keyword: string} =
+  {
+    hospitalIdx: 0,
+    reviewIdx: 0,
+    keyword: '',
+  };
 
 const currentSlice = createSlice({
   name: 'current',
@@ -18,6 +20,10 @@ const currentSlice = createSlice({
     setCurReview: (state, action: PayloadAction<number>) => {
       state.reviewIdx = action.payload;
     },
+    // 키워드 설정
+    setCurKeyword: (state, action: PayloadAction<string>) => {
+      state.keyword = action.payload;
+    },
     // 리뷰 idx  ++
     increaseCurReview: state => {
       state.reviewIdx += 1;
@@ -29,14 +35,20 @@ const currentSlice = createSlice({
   },
 });
 
-const {setCurHospital, setCurReview, increaseCurReview, decreaseCurReview} =
-  currentSlice.actions;
+const {
+  setCurHospital,
+  setCurReview,
+  setCurKeyword,
+  increaseCurReview,
+  decreaseCurReview,
+} = currentSlice.actions;
 const currentReducer = currentSlice.reducer;
 const current = (state: RootState) => state.current;
 
 export {
   setCurHospital,
   setCurReview,
+  setCurKeyword,
   increaseCurReview,
   decreaseCurReview,
   currentReducer,

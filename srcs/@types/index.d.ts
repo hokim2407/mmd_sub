@@ -93,4 +93,5 @@ interface HospitalType extends ScoreType {
   unsuggest_cnt?: number;
   review_page: number;
   reviews: ReviewType[];
+  page_end: boolean;
 }

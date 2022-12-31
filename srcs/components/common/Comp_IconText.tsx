@@ -7,11 +7,11 @@ import {
   ImageStyle,
   ColorValue,
 } from 'react-native';
-import CompIconImage from './Comp_IconImage';
-import CompNotoText from './Comp_NotoText';
+import IconImage from './Comp_IconImage';
+import NotoText from './Comp_NotoText';
 import tw from '../../libs/Lib_Tw';
 
-const CompIconText = ({
+const IconText = ({
   children,
   imageSrc,
   imageColor,
@@ -28,16 +28,16 @@ const CompIconText = ({
 }) => {
   return (
     <View style={[tw`flex-row-start`, containerStyle]}>
-      <CompIconImage
+      <IconImage
         color={imageColor}
         src={imageSrc}
         style={[tw`width-12 height-12`, imageStyle]}
       />
-      <CompNotoText style={[tw`font-12 text-g6 mr-1`, textStyle]}>
+      <NotoText style={[tw`font-12 text-g6 mr-1`, textStyle]}>
         {children}
-      </CompNotoText>
+      </NotoText>
     </View>
   );
 };
 
-export default CompIconText;
+export default IconText;

@@ -1,14 +1,14 @@
 import React from 'react';
 import {View} from 'react-native';
 import tw from '../../libs/Lib_Tw';
-import CompIconImage from './Comp_IconImage';
-import CompNotoText from './Comp_NotoText';
+import IconImage from './Comp_IconImage';
+import NotoText from './Comp_NotoText';
 
 import Star_Full from '../../assets/images/Star_Full.png';
 import Star_Half from '../../assets/images/Star_Half.png';
 import Star_Empty from '../../assets/images/Star_Empty.png';
 
-const CompStarRate = ({
+const StarRate = ({
   rate,
   fullRate = 10,
   starCount = 5,
@@ -33,19 +33,19 @@ const CompStarRate = ({
   return (
     <View style={tw`flex-row-start`}>
       {[...Array(starCount).keys()].map(idx => (
-        <CompIconImage
+        <IconImage
           key={idx}
           style={tw`width-16 height-16`}
           src={getStarImage(idx)}
         />
       ))}
       {showRate && (
-        <CompNotoText style={tw`pt-[2] pl-1 font-bold text-g7 font-14`}>
+        <NotoText style={tw`pt-[2] pl-1 font-bold text-g7 font-14`}>
           {rate}
-        </CompNotoText>
+        </NotoText>
       )}
     </View>
   );
 };
 
-export default CompStarRate;
+export default StarRate;

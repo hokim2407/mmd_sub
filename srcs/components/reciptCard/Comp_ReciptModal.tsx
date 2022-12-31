@@ -1,11 +1,11 @@
 import React from 'react';
 import tw from 'twrnc';
 import {Modal, TouchableOpacity, View} from 'react-native';
-import CompIconImage from '../common/Comp_IconImage';
+import IconImage from '../common/Comp_IconImage';
 import Cancel from '../../assets/images/Cancel.png';
-import CompNotoText from '../common/Comp_NotoText';
+import NotoText from '../common/Comp_NotoText';
 
-const CompReciptModal = ({
+const ReciptModal = ({
   visible,
   closeModal,
 }: {
@@ -26,8 +26,8 @@ const CompReciptModal = ({
           style={tw`flex-1 mx-8 my-50 p-4 items-center bg-white rounded-lg justify-between`}>
           <View style={tw`w-[100%] flex-1 flex-row justify-between`}>
             <View style={{width: 20}} />
-            <CompNotoText>모두닥의 클린 시스템</CompNotoText>
-            <CompIconImage
+            <NotoText>모두닥의 클린 시스템</NotoText>
+            <IconImage
               src={Cancel}
               onPress={closeModal}
               style={{width: 20, height: 20}}
@@ -39,4 +39,4 @@ const CompReciptModal = ({
   );
 };
 
-export default React.memo(CompReciptModal);
+export default React.memo(ReciptModal);

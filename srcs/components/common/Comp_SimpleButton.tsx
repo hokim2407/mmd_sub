@@ -1,9 +1,9 @@
 import React from 'react';
 import {TouchableHighlight} from 'react-native';
 import tw from '../../libs/Lib_Tw';
-import CompNotoText from '../common/Comp_NotoText';
+import NotoText from './Comp_NotoText';
 import {color} from '../../configs/Conf_Style';
-const CompSimpleButton = ({
+const SimpleButton = ({
   children,
   mode = 'big',
   onPress,
@@ -13,7 +13,7 @@ const CompSimpleButton = ({
   onPress?: () => void;
 }) => {
   const containerStyle =
-    mode === 'big' ? 'border-g6 p-3 w-[49%]' : 'aline-center border-g3 p-1';
+    mode === 'big' ? 'border-g6 p-3 w-[49%]' : 'align-center border-g3 p-1';
   const textStyle = mode === 'big' ? ' font-14' : 'font-12';
 
   return (
@@ -24,12 +24,10 @@ const CompSimpleButton = ({
         tw`bg-white flex-row-center rounded border rounded ${containerStyle}`,
       ]}>
       <>
-        <CompNotoText style={tw`px-1 text-g7 ${textStyle}`}>
-          {children}
-        </CompNotoText>
+        <NotoText style={tw`px-1 text-g7 ${textStyle}`}>{children}</NotoText>
       </>
     </TouchableHighlight>
   );
 };
 
-export default React.memo(CompSimpleButton);
+export default React.memo(SimpleButton);

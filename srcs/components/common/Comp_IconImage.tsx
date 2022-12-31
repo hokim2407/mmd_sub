@@ -9,7 +9,7 @@ import {
   ColorValue,
 } from 'react-native';
 
-const CompIconImage = ({
+const IconImage = ({
   src,
   color,
   style = {},
@@ -39,4 +39,4 @@ const CompIconImage = ({
   );
 };
 
-export default React.memo(CompIconImage);
+export default React.memo(IconImage);

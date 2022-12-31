@@ -1,9 +1,9 @@
 import React from 'react';
 import {View} from 'react-native';
 import tw from '../../libs/Lib_Tw';
-import CompStarRate from '../common/Comp_StarRate';
-import CompNotoText from '../common/Comp_NotoText';
-import CompRecomandIcon from '../review_comp/Comp_RecomandIcon';
+import StarRate from '../common/Comp_StarRate';
+import NotoText from '../common/Comp_NotoText';
+import LikeEmoIcon from './Comp_LikeEmoIcon';
 
 const CompStatCard = ({hospital}: {hospital: HospitalType}) => {
   const scoreType = {
@@ -21,12 +21,12 @@ const CompStatCard = ({hospital}: {hospital: HospitalType}) => {
           return (
             <React.Fragment key={idx}>
               <View style={tw`flex-1 p-1 flex-row-between`}>
-                <CompNotoText style={tw`flex-1 text-black font-12`}>
+                <NotoText style={tw`flex-1 text-black font-12`}>
                   {scoreType[key as keyof ScoreType]}
-                </CompNotoText>
+                </NotoText>
                 <View style={tw`w-0 h-5 px-1 border-l border-g3`} />
                 <View style={tw`flex-1`}>
-                  <CompStarRate rate={hospital[key as keyof ScoreType]} />
+                  <StarRate rate={hospital[key as keyof ScoreType]} />
                 </View>
               </View>
 
@@ -41,23 +41,21 @@ const CompStatCard = ({hospital}: {hospital: HospitalType}) => {
       {/* 평균 */}
       <View style={tw`flex-1 bg-g1  border border-l-0 border-g3`}>
         <View style={tw`flex-center`}>
-          <CompNotoText style={tw`text-black font-12 pt-4 text-g3`}>
+          <NotoText style={tw`text-black font-12 pt-4 text-g3`}>
             별점 평균
-          </CompNotoText>
+          </NotoText>
           <View style={tw`flex-row p-6 items-end`}>
-            <CompNotoText style={tw`font-bold font-40 text-black `}>
+            <NotoText style={tw`font-bold font-40 text-black `}>
               {hospital.total_score.toFixed(1)}
-            </CompNotoText>
-            <CompNotoText style={tw`p-1 font-bold font-18 text-g6`}>
-              /10
-            </CompNotoText>
+            </NotoText>
+            <NotoText style={tw`p-1 font-bold font-18 text-g6`}>/10</NotoText>
           </View>
         </View>
         <View style={tw`flex-row border-t border-g3`}>
-          <CompRecomandIcon recommand style={tw`border-r border-g3`}>
+          <LikeEmoIcon recommand style={tw`border-r border-g3`}>
             {hospital.suggest_cnt}
-          </CompRecomandIcon>
-          <CompRecomandIcon>{hospital.unsuggest_cnt}</CompRecomandIcon>
+          </LikeEmoIcon>
+          <LikeEmoIcon>{hospital.unsuggest_cnt}</LikeEmoIcon>
         </View>
       </View>
 

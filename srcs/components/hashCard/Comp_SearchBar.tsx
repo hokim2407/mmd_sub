@@ -1,12 +1,21 @@
 import React, {useState} from 'react';
 import {View, TextInput} from 'react-native';
 import tw from '../../libs/Lib_Tw';
-import CompIconImage from '../common/Comp_IconImage';
+import IconImage from '../common/Comp_IconImage';
 import SearchIcon from '../../assets/images/Search.png';
 import CancelIcon from '../../assets/images/Cancel.png';
 import {color} from '../../configs/Conf_Style';
-const CompSearchBar = ({onSearch}: {onSearch: (keyword: string) => void}) => {
-  const [keyword, setKeyword] = useState('');
+import {useAppSelector, useAppDispatch} from '../../context/store';
+import {resetReviewPage} from '../../context/Slice_hospitals';
+import {Search} from '../../libs/Lib_Search';
+
+const SearchBar = () => {
+  const dispatch = useAppDispatch();
+  const current = useAppSelector(state => state.current);
+  const hospital = useAppSelector(
+    state => state.hospitals.hospitals[current.hospitalIdx],
+  );
+  const [keyword, setKeyword] = useState(current.keyword);
 
   return (
     <View style={[tw`bg-white py-3 px-4`]}>
@@ -21,19 +30,20 @@ const CompSearchBar = ({onSearch}: {onSearch: (keyword: string) => void}) => {
           style={tw`w-[82%] h-8 p-0 font-14 noto-400`}
         />
         <View style={tw`w-[18%] flex-row-between`}>
-          <CompIconImage
+          <IconImage
             src={CancelIcon}
             style={tw`width-18 height-18`}
             onPress={() => {
               setKeyword('');
             }}
           />
-          <CompIconImage
+          <IconImage
             src={SearchIcon}
             color={color.p5}
             style={{width: 22, height: 22}}
-            onPress={() => {
-              onSearch(keyword);
+            onPress={async () => {
+              dispatch(resetReviewPage({idx: hospital.idx}));
+              await Search(dispatch, hospital, keyword);
             }}
           />
         </View>
@@ -42,4 +52,4 @@ const CompSearchBar = ({onSearch}: {onSearch: (keyword: string) => void}) => {
   );
 };
 
-export default React.memo(CompSearchBar);
+export default React.memo(SearchBar);
