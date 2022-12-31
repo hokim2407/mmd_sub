@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, Platform, UIManager} from 'react-native';
+import {SafeAreaView, StatusBar, Platform, UIManager,View,Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import PageMain from './pages/Page_Main';
@@ -10,6 +10,7 @@ import {store} from './context/Store';
 import {Provider} from 'react-redux';
 import PageReviewList from './pages/Page_ReviewList';
 import PageReviewDetail from './pages/Page_ReviewDetail';
+import BottomSheet from './components/common/Comp_BottomSheet';
 const App = () => {
   const Stack = createNativeStackNavigator();
   if (
@@ -29,6 +30,7 @@ const App = () => {
             <Stack.Screen name="ReviewDetail" component={PageReviewDetail} />
           </Stack.Navigator>
         </NavigationContainer>
+        <BottomSheet />
       </SafeAreaView>
     </Provider>
   );

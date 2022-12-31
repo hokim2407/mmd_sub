@@ -1,12 +1,10 @@
 import React, {useEffect, useState, useCallback} from 'react';
-import {Keyboard, View} from 'react-native';
+import {View} from 'react-native';
 import {FlatList, ActivityIndicator} from 'react-native';
 import tw from '../libs/Lib_Tw';
 import HashListCard from '../components/hashCard/Comp_HashList';
-import CompStatCard from '../components/statusCard/Comp_StatCard';
 
 import {useAppSelector, useAppDispatch} from '../context/Store';
-import ReciptCard from '../components/reciptCard/Comp_ReciptCard';
 import SetHeaderOpt from '../libs/Lib_SetHeaderOpt';
 import {setCurKeyword} from '../context/Slice_Current';
 import {ReviewProvider} from '../components/reviewCard/Context_Review';
@@ -14,6 +12,7 @@ import ReviewContentCard from '../components/reviewCard/Comp_ReviewContentCard';
 import ReviewProfileCard from '../components/reviewCard/Comp_ReviewProfileCard';
 import HrLine from '../components/common/Comp_HrLine';
 import {ReadReviews} from '../libs/Lib_ReadReviews';
+import FilterCard from '../components/filterCard/Comp_FilterCard';
 
 const PageReviewList = ({navigation}: NavProps) => {
   const dispatch = useAppDispatch();
@@ -53,14 +52,7 @@ const PageReviewList = ({navigation}: NavProps) => {
   }, []);
 
   const renderHeader = useCallback(() => {
-    return (
-      <>
-        <View style={tw`bg-white p-4 mb-3`}>
-          <CompStatCard hospital={hospital} />
-        </View>
-        <ReciptCard style={tw`mb-3`} />
-      </>
-    );
+    return <FilterCard hospital={hospital} />;
   }, [hospital]);
 
   const renderLoaderFooter = () => {
